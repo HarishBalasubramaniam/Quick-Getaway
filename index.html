@@ -1,158 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just For Us - A Little Escape</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-content">
-                <div class="logo">JFU</div>
-                <ul class="nav-links">
-                    <li><a href="#destination">Destination</a></li>
-                    <li><a href="#itinerary">Itinerary</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2a1710" />
+    <title>Oi Pouty!! — A little escape</title>
+    <meta name="description" content="A birthday surprise, made just for us." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="hero">
+      <div class="hero__image" aria-hidden="true"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
 
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="hero-background">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=1600&fit=crop" alt="Tropical sunset">
-            </div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <p class="hero-subtitle">A LITTLE ESCAPE</p>
-                <h1 class="hero-title">JUST FOR US</h1>
-                <p class="hero-tagline">Pack your bags, my love.</p>
-                <div class="hero-divider"></div>
-                <p class="hero-dates">25 - 28 September 2026</p>
-                <div class="cta-container">
-                    <p class="hero-cta">Your surprise begins here</p>
-                    <a href="#destination" class="arrow">→</a>
-                </div>
-            </div>
-        </section>
+      <section class="hero__content" aria-labelledby="hero-title">
+        <h1 id="hero-title">Oi Pouty!!</h1>
+        <p class="hero__note">I made something for us.</p>
+        <span class="hero__rule" aria-hidden="true"></span>
 
-        <!-- Destination Section -->
-        <section class="destination" id="destination">
-            <div class="section-content">
-                <h2 class="section-title">Our Destination</h2>
-                <div class="destination-grid">
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&h=400&fit=crop" alt="Beach resort">
-                        <h3>Luxury Beachfront</h3>
-                        <p>Exclusive resort with private beach access and world-class amenities.</p>
-                    </div>
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=500&h=400&fit=crop" alt="Sunset view">
-                        <h3>Stunning Sunsets</h3>
-                        <p>Experience breathtaking views as the sun dips below the horizon.</p>
-                    </div>
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&h=400&fit=crop" alt="Romantic dining">
-                        <h3>Fine Dining</h3>
-                        <p>Romantic dinner experiences with gourmet cuisine and elegant ambiance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <button class="date-trigger" id="date-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+          <span class="date-trigger__label">Our little escape</span>
+          <span class="date-trigger__value"><span>24 Sep</span><span class="date-trigger__arrow">→</span><span id="selected-date">27 Sep 2026</span></span>
+          <span class="date-trigger__hint">Tap to choose our return</span>
+        </button>
 
-        <!-- Itinerary Section -->
-        <section class="itinerary" id="itinerary">
-            <div class="section-content">
-                <h2 class="section-title">4-Day Itinerary</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Day 1</div>
-                        <div class="timeline-content">
-                            <h3>Arrival & Relaxation</h3>
-                            <p>Arrive at your luxury resort and unwind with spa treatments and beach walks.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Day 2</div>
-                        <div class="timeline-content">
-                            <h3>Adventure Awaits</h3>
-                            <p>Explore water sports, snorkeling, or scenic island tours.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Day 3</div>
-                        <div class="timeline-content">
-                            <h3>Culinary Experience</h3>
-                            <p>Private chef dinner on the beach with champagne and starlight.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Day 4</div>
-                        <div class="timeline-content">
-                            <h3>Final Memories</h3>
-                            <p>Relax and reflect before departure with sunset cocktails.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <a class="hero__cta" href="#surprise">
+          <span>Your surprise begins here</span><span aria-hidden="true">→</span>
+        </a>
+      </section>
+    </main>
 
-        <!-- Gallery Section -->
-        <section class="gallery" id="gallery">
-            <div class="section-content">
-                <h2 class="section-title">Gallery</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Tropical beach">
-                        <div class="gallery-overlay">
-                            <p>Paradise Beach</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1514282401047-61ca71ca7fca?w=400&h=300&fit=crop" alt="Pool view">
-                        <div class="gallery-overlay">
-                            <p>Infinity Pool</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1540932239986-310128078ceb?w=400&h=300&fit=crop" alt="Spa">
-                        <div class="gallery-overlay">
-                            <p>Luxury Spa</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop" alt="Restaurant">
-                        <div class="gallery-overlay">
-                            <p>Beachfront Dining</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="surprise" id="surprise">
+      <p>One tiny question at a time</p>
+      <h2>Ready to choose our escape?</h2>
+    </section>
 
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="section-content">
-                <h2 class="section-title">Get in Touch</h2>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
-        </section>
+    <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
+      <div class="calendar__topline">
+        <div>
+          <p class="calendar__eyebrow">Pick our return</p>
+          <h2 id="calendar-title">September 2026</h2>
+        </div>
+        <button class="calendar__close" id="calendar-close" type="button" aria-label="Close calendar">×</button>
+      </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2026 Just For Us. A little escape made special.</p>
-        </footer>
-    </div>
+      <div class="calendar__weekdays" aria-hidden="true">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div class="calendar__days" id="calendar-days" role="grid" aria-label="September 2026"></div>
+
+      <div class="calendar__legend">
+        <span><i class="legend-start"></i>Departure</span>
+        <span><i class="legend-birthday"></i>Pouty’s birthday</span>
+        <span><i class="legend-return"></i>Your return</span>
+      </div>
+      <p class="calendar__selection" id="calendar-selection" aria-live="polite">24–27 September 2026 · 3 nights</p>
+      <button class="calendar__done" id="calendar-done" type="button">That’s our weekend</button>
+    </dialog>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
+
