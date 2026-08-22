@@ -51,7 +51,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .calendar__done:disabled { border-color:rgba(249,237,218,.25); color:rgba(42,23,16,.48); background:rgba(249,237,218,.42); cursor:not-allowed; opacity:.62; }
 @keyframes rise { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
 @keyframes settle { from{opacity:.55} to{opacity:1} }
-@media(max-width:720px){ .hero,.surprise{background-image:url("sunset-villa-original.png");background-size:cover;background-position:center top} }
+@media(max-width:720px){ .hero,.surprise{background-color:#1b100b;background-image:url("sunset-villa-original.png"),url("sunset-villa-original.png");background-size:contain,cover;background-position:center,center;background-repeat:no-repeat} }
 @media(max-width:520px){ .hero{padding:2.4rem 1.4rem} .hero__content{margin-top:-2vh} h1{font-size:clamp(3.4rem,17vw,5rem)} .hero__statement{font-size:clamp(4.5rem,23vw,7rem);line-height:.76} .hero__note{font-size:clamp(1.55rem,8vw,2.2rem)} }
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
 
