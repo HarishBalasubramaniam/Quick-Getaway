@@ -10,7 +10,7 @@ button, a { font:inherit; color:inherit; }
 .journey__blur { display:none; }
 .journey__image { display:none; }
 .journey__shade { z-index:-1; background:linear-gradient(180deg,rgba(18,9,6,.32),rgba(21,10,7,.18) 46%,rgba(18,9,6,.4)); }
-.hero { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:3rem 1.8rem; background-color:#1b100b; background-image:url("romantic-sunset-pool-square.png"),url("romantic-sunset-pool-square.png"); background-size:contain,cover; background-position:center,center; background-repeat:no-repeat; }
+.hero { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:3rem 1.8rem; background-color:#1b100b; background-image:url("romantic-sunset-pool-desktop.png"); background-size:cover; background-position:center; background-repeat:no-repeat; }
 .hero__shade,.hero__frame { position:absolute; inset:0; }
 .hero__shade { z-index:0; background:linear-gradient(180deg,rgba(20,10,7,.18),transparent 50%,rgba(14,7,5,.2)); }
 .hero__frame { z-index:2; pointer-events:none; inset:clamp(.8rem,2vw,1.4rem); border:1px solid rgba(232,198,139,.82); }
@@ -23,7 +23,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .date-trigger { display:inline-flex; align-items:center; justify-content:center; gap:1rem; min-width:min(19rem,86vw); border:1px solid rgba(249,237,218,.48); border-radius:999px; padding:1rem 1.5rem; background:rgba(39,19,12,.24); backdrop-filter:blur(8px); cursor:pointer; font-family:"Montserrat","Helvetica Neue",sans-serif; font-size:.72rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; transition:.25s ease; }
 .date-trigger:hover,.date-trigger:focus-visible { border-color:var(--champagne); background:rgba(39,19,12,.48); outline:none; transform:translateY(-2px); }
 .date-trigger__arrow { color:var(--champagne); }
-.surprise { position:relative; display:grid; min-height:100svh; place-content:center; overflow:hidden; padding:5rem 2rem; text-align:center; background-color:#1b100b; background-image:url("romantic-sunset-pool-square.png"),url("romantic-sunset-pool-square.png"); background-size:contain,cover; background-position:center,center; background-repeat:no-repeat; text-shadow:0 2px 28px rgba(15,7,5,.7); }
+.surprise { position:relative; display:grid; min-height:100svh; place-content:center; overflow:hidden; padding:5rem 2rem; text-align:center; background-color:#1b100b; background-image:url("romantic-sunset-pool-desktop.png"); background-size:cover; background-position:center; background-repeat:no-repeat; text-shadow:0 2px 28px rgba(15,7,5,.7); }
 .surprise p,.calendar__eyebrow { color:var(--champagne); font-family:Georgia,"Times New Roman",serif; font-size:.7rem; letter-spacing:.32em; text-transform:uppercase; }
 .surprise h2 { max-width:45rem; margin:1rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(3rem,8vw,6rem); font-weight:400; line-height:.95; }
 .surprise__content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
