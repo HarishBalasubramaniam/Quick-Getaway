@@ -36,8 +36,15 @@ function renderCalendar() {
 }
 
 function selectReturn(day) {
+  if (day > 29) {
+    selection.textContent = "Oopsie Your Guy got no Leaves! 😔";
+    selection.classList.add("calendar__selection--error");
+    return;
+  }
+
   returnDay = day;
-  selection.textContent = `24–${day} September 2026 · ${day - departureDay} ${day - departureDay === 1 ? "night" : "nights"}`;
+  selection.classList.remove("calendar__selection--error");
+  selection.textContent = `24–${day} September 2026 · ${day - departureDay} ${day - departureDay === 1 ? "Day" : "Days"}`;
   renderCalendar();
 }
 

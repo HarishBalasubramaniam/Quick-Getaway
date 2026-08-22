@@ -42,7 +42,8 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .calendar__legend span { display:flex; align-items:center; gap:.38rem; }
 .calendar__legend i { width:.55rem; height:.55rem; border-radius:50%; }
 .legend-start { background:var(--champagne); }.legend-birthday { background:var(--rose); }.legend-return { background:var(--cream); }
-.calendar__selection { margin:1rem 0; font-family:Georgia,"Times New Roman",serif; font-style:italic; text-align:center; }
+.calendar__selection { margin:1rem 0; font-family:Georgia,"Times New Roman",serif; font-style:italic; text-align:center; transition:color .2s ease; }
+.calendar__selection--error { color:var(--rose); }
 .calendar__done { width:100%; border:1px solid var(--champagne); border-radius:999px; padding:.9rem; color:#2a1710; background:var(--champagne); cursor:pointer; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; }
 @keyframes rise { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
 @keyframes settle { from{opacity:.7;transform:scale(1.08)} to{opacity:1;transform:scale(1.015)} }
