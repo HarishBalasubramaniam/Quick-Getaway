@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2a1710" />
-    <title>Oi Pouty!! — A little escape</title>
+    <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=0020fa9" />
+    <link rel="stylesheet" href="styles.css?v=cormorant-20260822" />
   </head>
   <body>
     <main class="hero">
@@ -15,14 +15,15 @@
       <div class="hero__frame" aria-hidden="true"></div>
 
       <section class="hero__content" aria-labelledby="hero-title">
-        <h1 id="hero-title">Oi Pouty!!</h1>
-        <p class="hero__note">I made something for us.</p>
+        <h1 id="hero-title">Oi Pouty!</h1>
+        <p class="hero__eyebrow">A little escape</p>
+        <p class="hero__statement">Just for us</p>
+        <p class="hero__note">Pack your bags, Let’s Go!</p>
         <span class="hero__rule" aria-hidden="true"></span>
 
         <button class="date-trigger" id="date-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
-          <span class="date-trigger__label">Our little escape</span>
-          <span class="date-trigger__value"><span>24 Sep</span><span class="date-trigger__arrow">→</span><span id="selected-date">27 Sep 2026</span></span>
-          <span class="date-trigger__hint">Tap to choose our return</span>
+          <span>Select your Dates</span>
+          <span class="date-trigger__arrow" aria-hidden="true">→</span>
         </button>
 
         <a class="hero__cta" href="#surprise">
@@ -39,7 +40,7 @@
     <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
       <div class="calendar__topline">
         <div>
-          <p class="calendar__eyebrow">Pick our return</p>
+          <p class="calendar__eyebrow">Select your dates</p>
           <h2 id="calendar-title">September 2026</h2>
         </div>
         <button class="calendar__close" id="calendar-close" type="button" aria-label="Close calendar">×</button>
@@ -59,6 +60,6 @@
       <button class="calendar__done" id="calendar-done" type="button">That’s our weekend</button>
     </dialog>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=dates-20260822"></script>
   </body>
 </html>
