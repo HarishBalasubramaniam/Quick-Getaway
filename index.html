@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=portrait-mobile-20260822" />
+    <link rel="stylesheet" href="styles.css?v=mood-question-20260822" />
   </head>
   <body>
     <div class="journey">
@@ -33,8 +33,15 @@
     </main>
 
     <section class="surprise" id="surprise">
-      <p>One tiny question at a time</p>
-      <h2>Ready to choose our escape?</h2>
+      <div class="surprise__content">
+        <p>Umm… let’s see what kind of escape Pouty wants.</p>
+        <h2>Ready to pick the mood?</h2>
+        <div class="mood-choice" role="group" aria-label="Ready to pick the mood?">
+          <button class="mood-choice__button" id="mood-yes" type="button">Yes</button>
+          <button class="mood-choice__button mood-choice__button--no" id="mood-no" type="button">No</button>
+        </div>
+        <p class="mood-choice__message" id="mood-message" aria-live="polite"></p>
+      </div>
     </section>
     </div>
 
@@ -61,6 +68,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=photo-flow-20260822"></script>
+    <script src="script.js?v=mood-question-20260822"></script>
   </body>
 </html>
