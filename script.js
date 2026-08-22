@@ -4,6 +4,7 @@ const closeButton = document.querySelector("#calendar-close");
 const doneButton = document.querySelector("#calendar-done");
 const days = document.querySelector("#calendar-days");
 const selection = document.querySelector("#calendar-selection");
+const surprise = document.querySelector("#surprise");
 
 const departureDay = 24;
 const birthdayDay = 25;
@@ -39,11 +40,13 @@ function selectReturn(day) {
   if (day > 29) {
     selection.textContent = "Oopsie Your Guy got no Leaves! 😔";
     selection.classList.add("calendar__selection--error");
+    doneButton.disabled = true;
     return;
   }
 
   returnDay = day;
   selection.classList.remove("calendar__selection--error");
+  doneButton.disabled = false;
   selection.textContent = `24–${day} September 2026 · ${day - departureDay} ${day - departureDay === 1 ? "Day" : "Days"}`;
   renderCalendar();
 }
@@ -61,7 +64,10 @@ function closeCalendar() {
 
 trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
-doneButton.addEventListener("click", closeCalendar);
+doneButton.addEventListener("click", () => {
+  closeCalendar();
+  requestAnimationFrame(() => surprise.scrollIntoView({ behavior: "smooth", block: "start" }));
+});
 dialog.addEventListener("click", event => {
   if (event.target === dialog) closeCalendar();
 });
