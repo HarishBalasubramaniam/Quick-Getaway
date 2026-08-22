@@ -3,7 +3,6 @@ const trigger = document.querySelector("#date-trigger");
 const closeButton = document.querySelector("#calendar-close");
 const doneButton = document.querySelector("#calendar-done");
 const days = document.querySelector("#calendar-days");
-const selectedDate = document.querySelector("#selected-date");
 const selection = document.querySelector("#calendar-selection");
 
 const departureDay = 24;
@@ -38,7 +37,6 @@ function renderCalendar() {
 
 function selectReturn(day) {
   returnDay = day;
-  selectedDate.textContent = `${day} Sep 2026`;
   selection.textContent = `24–${day} September 2026 · ${day - departureDay} ${day - departureDay === 1 ? "night" : "nights"}`;
   renderCalendar();
 }
