@@ -26,6 +26,13 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .surprise { position:relative; display:grid; min-height:100svh; place-content:center; overflow:hidden; padding:5rem 2rem; text-align:center; background-color:#1b100b; background-image:url("romantic-sunset-pool-square.png"),url("romantic-sunset-pool-square.png"); background-size:contain,cover; background-position:center,center; background-repeat:no-repeat; text-shadow:0 2px 28px rgba(15,7,5,.7); }
 .surprise p,.calendar__eyebrow { color:var(--champagne); font-family:Georgia,"Times New Roman",serif; font-size:.7rem; letter-spacing:.32em; text-transform:uppercase; }
 .surprise h2 { max-width:45rem; margin:1rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(3rem,8vw,6rem); font-weight:400; line-height:.95; }
+.surprise__content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
+.mood-choice { display:flex; width:min(22rem,86vw); gap:.8rem; margin-top:1.5rem; }
+.mood-choice__button { flex:1; border:1px solid rgba(249,237,218,.62); border-radius:999px; padding:.95rem 1.2rem; color:var(--espresso); background:var(--champagne); cursor:pointer; font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; transition:.22s ease; }
+.mood-choice__button--no { color:var(--cream); background:rgba(39,19,12,.34); backdrop-filter:blur(8px); }
+.mood-choice__button:hover,.mood-choice__button:focus-visible { border-color:var(--cream); outline:none; transform:translateY(-2px); }
+.mood-choice__button--selected { box-shadow:0 0 0 3px rgba(218,189,136,.25); }
+.surprise .mood-choice__message { min-height:1.5rem; margin:1rem 0 0; color:var(--rose); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.25rem,3vw,1.6rem); font-style:italic; font-weight:400; letter-spacing:0; text-transform:none; }
 .calendar { width:min(31rem,calc(100vw - 1.5rem)); border:1px solid rgba(218,189,136,.72); border-radius:1.25rem; padding:1.35rem; color:var(--cream); background:linear-gradient(145deg,#382219,#1f120e); box-shadow:0 24px 100px rgba(0,0,0,.62); }
 .calendar::backdrop { background:rgba(18,9,6,.7); backdrop-filter:blur(7px); }
 .calendar__topline { display:flex; align-items:flex-start; justify-content:space-between; }
