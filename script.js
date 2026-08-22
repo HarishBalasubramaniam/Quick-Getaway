@@ -5,6 +5,9 @@ const doneButton = document.querySelector("#calendar-done");
 const days = document.querySelector("#calendar-days");
 const selection = document.querySelector("#calendar-selection");
 const surprise = document.querySelector("#surprise");
+const moodYes = document.querySelector("#mood-yes");
+const moodNo = document.querySelector("#mood-no");
+const moodMessage = document.querySelector("#mood-message");
 
 const departureDay = 24;
 const birthdayDay = 25;
@@ -61,6 +64,18 @@ function closeCalendar() {
   trigger.setAttribute("aria-expanded", "false");
   trigger.focus();
 }
+
+moodNo.addEventListener("click", () => {
+  moodYes.classList.remove("mood-choice__button--selected");
+  moodNo.classList.add("mood-choice__button--selected");
+  moodMessage.textContent = "Ugh uh! Pick again! 🤨";
+});
+
+moodYes.addEventListener("click", () => {
+  moodNo.classList.remove("mood-choice__button--selected");
+  moodYes.classList.add("mood-choice__button--selected");
+  moodMessage.textContent = "";
+});
 
 trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
