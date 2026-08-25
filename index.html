@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=digital-countdown-20260826" />
+    <link rel="stylesheet" href="styles.css?v=final-countdown-20260826" />
   </head>
   <body>
     <div class="journey">
@@ -88,7 +88,16 @@
       <p class="verdict-dialog__eyebrow">You got it 😉</p>
       <h2 id="verdict-title">Let your guy cook!! <span class="verdict-dialog__title-emoji" aria-hidden="true">😎</span></h2>
       <p class="verdict-dialog__message"><span>Your little wish list is safe with me.</span><span>Now let me turn it into a beautiful escape, just for us. ❤️</span></p>
-      <button class="verdict-dialog__close" id="verdict-close" type="button">Stay Tuned.. <span class="verdict-dialog__kiss" aria-hidden="true">😘</span></button>
+      <button class="verdict-dialog__close" id="verdict-close" type="button">All you gotta do is wait <span class="verdict-dialog__kiss" aria-hidden="true">😘</span></button>
+      <aside class="countdown-shell" id="countdown-shell" aria-label="Countdown to Pouty’s birthday">
+        <div class="countdown" id="birthday-countdown" role="timer">
+          <div><strong id="countdown-days">00</strong><span>Days</span></div>
+          <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
+          <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
+          <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
+        </div>
+        <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
+      </aside>
     </dialog>
 
     <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
@@ -114,16 +123,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <aside class="countdown-shell" id="countdown-shell" aria-label="Countdown to Pouty’s birthday" hidden>
-      <div class="countdown" id="birthday-countdown" role="timer">
-        <div><strong id="countdown-days">00</strong><span>Days</span></div>
-        <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
-        <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
-        <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
-      </div>
-      <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
-    </aside>
-
-    <script src="script.js?v=delayed-countdown-20260826"></script>
+    <script src="script.js?v=final-countdown-20260826"></script>
   </body>
 </html>
