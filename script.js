@@ -43,7 +43,7 @@ function renderCalendar() {
     button.textContent = day;
     button.setAttribute("role", "gridcell");
     button.setAttribute("aria-label", `${day} September 2026`);
-    if (day < departureDay || day === departureDay) button.disabled = true;
+    if (day < 27) button.disabled = true;
     if (day === departureDay) button.classList.add("calendar__day--start");
     if (day === birthdayDay) {
       button.classList.add("calendar__day--birthday");
@@ -60,7 +60,7 @@ function renderCalendar() {
 }
 
 function selectReturn(day) {
-  if (day > 29) {
+  if (day >= 29) {
     selection.textContent = "Oopsie Your Guy got no Leaves! 😔";
     selection.classList.add("calendar__selection--error");
     doneButton.disabled = true;
@@ -145,15 +145,15 @@ escapeCards.forEach(card => {
 });
 
 const destinationProfiles = {
-  "Koh Samui": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":3, "Spa & Bathtub":3, "Beachfront Romance":3, "Somewhere New":2 },
-  "Bali / Ubud": { romantic:5, berserk:2, culture:4, "Quiet & Secluded":3, "Private Pool":3, "Spa & Bathtub":3, "Heritage Streets":2, "Local Food":2, "Slow Wandering":3, "Somewhere New":2 },
+  "Koh Samui": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":3, "Massage & Spa":3, "Beachfront Romance":3, "Somewhere New":2 },
+  "Bali / Ubud": { romantic:5, berserk:2, culture:4, "Quiet & Secluded":3, "Private Pool":3, "Massage & Spa":3, "Heritage Streets":2, "Local Food":2, "Slow Wandering":3, "Somewhere New":2 },
   "Phuket": { romantic:4, berserk:3, culture:1, "Private Pool":3, "Beachfront Romance":3, "Shopping Spree":2, "Night Markets":2 },
   "Bangkok": { romantic:1, berserk:5, culture:4, "Shopping Spree":3, "Street Food Hunt":3, "Night Markets":3, "Café Hopping":2, "Heritage Streets":2, "Local Food":3 },
   "Kuala Lumpur": { romantic:1, berserk:5, culture:3, "Shopping Spree":3, "Street Food Hunt":2, "Café Hopping":3, "Local Food":3 },
   "Ho Chi Minh City": { romantic:1, berserk:4, culture:5, "Shopping Spree":2, "Street Food Hunt":3, "Café Hopping":3, "Heritage Streets":3, "Local Food":3, "Somewhere New":2 },
   "Penang": { romantic:2, berserk:3, culture:5, "Street Food Hunt":3, "Heritage Streets":3, "Local Food":3, "Slow Wandering":2, "Somewhere New":2 },
   "Da Nang / Hoi An": { romantic:4, berserk:1, culture:5, "Beachfront Romance":3, "Heritage Streets":3, "Local Food":2, "Slow Wandering":3, "Romantic Dinner":2, "Somewhere New":3 },
-  "Langkawi": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":2, "Spa & Bathtub":2, "Beachfront Romance":3, "Somewhere New":2 }
+  "Langkawi": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":2, "Massage & Spa":2, "Beachfront Romance":3, "Somewhere New":2 }
 };
 
 function calculateMatches() {
