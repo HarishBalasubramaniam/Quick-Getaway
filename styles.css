@@ -71,6 +71,9 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .verdict-dialog::backdrop { background:rgba(18,9,6,.78); backdrop-filter:blur(8px); }
 .verdict-dialog__eyebrow { position:relative; z-index:2; margin:0; color:var(--champagne); font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; }
 .verdict-dialog h2 { position:relative; z-index:2; margin:.8rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(2.2rem,7vw,3.5rem); font-weight:400; line-height:.94; }
+.verdict-dialog__title-emoji { display:inline-block; margin-left:.1em; font-size:.58em; line-height:1; vertical-align:.16em; }
+.verdict-dialog__message { display:flex; flex-direction:column; align-items:center; gap:.28rem; margin:1rem auto 0; max-width:29rem; text-wrap:balance; }
+.verdict-dialog__message span { display:block; }
 .verdict-dialog > p:not(.verdict-dialog__eyebrow) { position:relative; z-index:2; color:rgba(249,237,218,.76); font-size:.76rem; line-height:1.6; }
 .verdict-dialog__close { position:relative; z-index:2; display:flex; width:100%; justify-content:center; border-radius:999px; padding:.85rem 1rem; cursor:pointer; text-decoration:none; }
 .verdict-dialog__close { margin-top:1.2rem; border:1px solid rgba(249,237,218,.35); color:var(--cream); background:transparent; font-size:.68rem; }
