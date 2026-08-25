@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=italic-intro-20260822" />
+    <link rel="stylesheet" href="styles.css?v=escape-moods-20260825" />
   </head>
   <body>
     <div class="journey">
@@ -40,7 +40,24 @@
           <button class="mood-choice__button" id="mood-yes" type="button">Yes</button>
           <button class="mood-choice__button mood-choice__button--no" id="mood-no" type="button">No</button>
         </div>
-        <p class="mood-choice__message" id="mood-message" aria-live="polite"></p>
+        <div class="mood-reaction" id="mood-message" role="status" aria-live="polite" hidden>
+          <span class="mood-reaction__emoji" aria-hidden="true">🙂‍↔️</span>
+          <span>Ugh uh! <strong>Pick again</strong> 🤨</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="escape-options" id="escape-options" aria-labelledby="escape-options-title">
+      <div class="escape-options__content">
+        <p class="escape-options__eyebrow">Choose your kind of happy</p>
+        <h2 id="escape-options-title">What mood is Pouty feeling?</h2>
+        <div class="escape-grid">
+          <button class="escape-card" type="button" data-mood="Beach & Pool"><span aria-hidden="true">🌊</span><strong>Beach & Pool</strong><small>Slow mornings, sunset swims and nowhere to rush.</small></button>
+          <button class="escape-card" type="button" data-mood="Shopping & City"><span aria-hidden="true">🛍️</span><strong>Shopping & City</strong><small>Cute cafés, little finds and a lively evening out.</small></button>
+          <button class="escape-card" type="button" data-mood="Nature & Quiet"><span aria-hidden="true">🌿</span><strong>Nature & Quiet</strong><small>Fresh air, peaceful views and time just for us.</small></button>
+          <button class="escape-card" type="button" data-mood="Spa & Private Villa"><span aria-hidden="true">🛁</span><strong>Spa & Private Villa</strong><small>A private pool, a long soak and total switch-off mode.</small></button>
+        </div>
+        <p class="escape-options__selection" id="escape-selection" aria-live="polite">Pick the one that feels most like you.</p>
       </div>
     </section>
     </div>
@@ -68,6 +85,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=mood-question-20260822"></script>
+    <script src="script.js?v=escape-moods-20260825"></script>
   </body>
 </html>
