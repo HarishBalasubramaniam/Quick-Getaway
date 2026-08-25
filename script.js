@@ -20,6 +20,14 @@ const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
 const fireworks = document.querySelector("#fireworks");
+const birthdayCountdown = document.querySelector("#birthday-countdown");
+const countdownBirthday = document.querySelector("#countdown-birthday");
+const countdownDays = document.querySelector("#countdown-days");
+const countdownHours = document.querySelector("#countdown-hours");
+const countdownMinutes = document.querySelector("#countdown-minutes");
+const countdownSeconds = document.querySelector("#countdown-seconds");
+const birthdayMoment = new Date("2026-09-25T00:00:00+08:00").getTime();
+let countdownTimerId = null;
 let selectedCategory = "";
 let selectedSubtopics = [];
 
@@ -215,6 +223,35 @@ function submitGoogleForm(result) {
   return true;
 }
 
+function updateBirthdayCountdown() {
+  const remaining = birthdayMoment - Date.now();
+  if (remaining <= 0) {
+    birthdayCountdown.hidden = true;
+    countdownBirthday.hidden = false;
+    if (countdownTimerId) clearInterval(countdownTimerId);
+    countdownTimerId = null;
+    return;
+  }
+
+  const totalSeconds = Math.floor(remaining / 1000);
+  const daysLeft = Math.floor(totalSeconds / 86400);
+  const hoursLeft = Math.floor((totalSeconds % 86400) / 3600);
+  const minutesLeft = Math.floor((totalSeconds % 3600) / 60);
+  const secondsLeft = totalSeconds % 60;
+  countdownDays.textContent = String(daysLeft).padStart(2, "0");
+  countdownHours.textContent = String(hoursLeft).padStart(2, "0");
+  countdownMinutes.textContent = String(minutesLeft).padStart(2, "0");
+  countdownSeconds.textContent = String(secondsLeft).padStart(2, "0");
+}
+
+function startBirthdayCountdown() {
+  if (countdownTimerId) clearInterval(countdownTimerId);
+  birthdayCountdown.hidden = false;
+  countdownBirthday.hidden = true;
+  updateBirthdayCountdown();
+  countdownTimerId = setInterval(updateBirthdayCountdown, 1000);
+}
+
 function launchFireworks() {
   fireworks.replaceChildren();
   const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
@@ -248,10 +285,13 @@ verdictButton.addEventListener("click", () => {
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
   launchFireworks();
+  startBirthdayCountdown();
   verdictDialog.showModal();
 });
 
 verdictClose.addEventListener("click", () => {
+  if (countdownTimerId) clearInterval(countdownTimerId);
+  countdownTimerId = null;
   verdictDialog.close();
   selectedCategory = "";
   selectedSubtopics = [];
