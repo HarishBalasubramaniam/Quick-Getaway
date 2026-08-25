@@ -79,7 +79,11 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .verdict-dialog__close { margin-top:1.2rem; border:1px solid rgba(249,237,218,.35); color:var(--cream); background:transparent; font-size:.68rem; }
 .verdict-dialog__kiss { display:inline-block; margin-left:.16em; font-size:2.15em; line-height:.7; filter:drop-shadow(0 6px 12px rgba(231,161,160,.4)); transform-origin:center; animation:kissOut 1.35s cubic-bezier(.2,1.3,.3,1) infinite alternate; }
 .countdown-shell { position:fixed; top:clamp(1.45rem,3vw,2.1rem); right:clamp(1.45rem,3vw,2.1rem); bottom:auto; z-index:50; width:min(10.5rem,calc(100vw - 2.9rem)); color:var(--cream); }
-.countdown-shell--dialog { top:1rem; right:1rem; bottom:auto; z-index:5; }
+.countdown-shell--dialog { position:absolute; top:.85rem; right:.85rem; bottom:auto; z-index:5; width:min(9.5rem,calc(100% - 1.7rem)); }
+.countdown-shell[hidden] { display:none; }
+.countdown-shell--arrive { animation:countdownArrive .48s cubic-bezier(.22,1,.36,1) both; }
+.verdict-dialog:has(> .countdown-shell--dialog) { padding-top:4.65rem; }
+@keyframes countdownArrive { from{opacity:.2;transform:translate3d(12px,-8px,0) scale(.94)} to{opacity:1;transform:none} }
 .countdown { display:grid; grid-template-columns:repeat(4,1fr); padding:.38rem .24rem; border:0; background:linear-gradient(90deg,rgba(25,12,8,.12),rgba(25,12,8,.58)); filter:drop-shadow(0 5px 14px rgba(0,0,0,.3)); backdrop-filter:blur(7px); }
 .countdown div { position:relative; display:flex; flex-direction:column; align-items:center; gap:.08rem; }
 .countdown div:not(:last-child)::after { content:"·"; position:absolute; right:-.08rem; top:-.08rem; color:rgba(218,189,136,.55); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.1rem; }

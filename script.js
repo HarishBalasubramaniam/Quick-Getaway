@@ -84,13 +84,14 @@ function selectReturn(day) {
 }
 
 function openCalendar() {
-  dockCountdown(dialog);
+  countdownShell.hidden = true;
   dialog.showModal();
   trigger.setAttribute("aria-expanded", "true");
 }
 
 function closeCalendar() {
   dialog.close();
+  countdownShell.hidden = false;
   releaseCountdown();
   trigger.setAttribute("aria-expanded", "false");
   trigger.focus();
@@ -261,6 +262,7 @@ function dockCountdown(container) {
 }
 
 function releaseCountdown() {
+  countdownShell.hidden = false;
   document.body.append(countdownShell);
   countdownShell.classList.remove("countdown-shell--dialog");
 }
@@ -333,9 +335,23 @@ dialog.addEventListener("click", event => {
 });
 dialog.addEventListener("close", () => {
   trigger.setAttribute("aria-expanded", "false");
+  countdownShell.hidden = false;
   releaseCountdown();
 });
 verdictDialog.addEventListener("close", releaseCountdown);
+
+const journeyPages = document.querySelectorAll(".hero, .surprise, .escape-options, .subtopic-page");
+const countdownPageObserver = new IntersectionObserver(entries => {
+  const activePage = entries
+    .filter(entry => entry.isIntersecting && !entry.target.hidden)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (!activePage || dialog.open || verdictDialog.open) return;
+  countdownShell.classList.remove("countdown-shell--arrive");
+  void countdownShell.offsetWidth;
+  countdownShell.classList.add("countdown-shell--arrive");
+}, { threshold:[0.45, 0.7] });
+journeyPages.forEach(page => countdownPageObserver.observe(page));
+
 renderCalendar();
 startBirthdayCountdown();
 
