@@ -14,11 +14,18 @@ const escapeSelection = document.querySelector("#escape-selection");
 const subtopicPanel = document.querySelector("#subtopic-panel");
 const subtopicChips = document.querySelector("#subtopic-chips");
 const subtopicNote = document.querySelector("#subtopic-note");
+const verdictButton = document.querySelector("#verdict-button");
+const verdictDialog = document.querySelector("#verdict-dialog");
+const verdictSend = document.querySelector("#verdict-send");
+const verdictClose = document.querySelector("#verdict-close");
+const fireworks = document.querySelector("#fireworks");
+let selectedCategory = "";
+let selectedSubtopics = [];
 
 const subtopicsByCategory = {
-  romantic: ["Quiet & Secluded", "Private Pool", "Luxurious Bathtub", "Beachfront", "Spa Day", "Sleep In", "Romantic Fine Dining", "Somewhere New"],
-  berserk: ["Shopping Spree", "Street Food Hunt", "Night Markets", "Café Hopping", "Lively & Convenient", "Explore All Day", "Rooftop Drinks", "Somewhere New"],
-  culture: ["Heritage Streets", "Local Food", "Temple & Art Trails", "Slow Wandering", "Hidden Cafés", "Romantic Dinner", "A Little Adventure", "Somewhere New"]
+  romantic: ["Quiet & Secluded", "Private Pool", "Spa & Bathtub", "Beachfront Romance", "Somewhere New"],
+  berserk: ["Shopping Spree", "Street Food Hunt", "Night Markets", "Café Hopping", "Somewhere New"],
+  culture: ["Heritage Streets", "Local Food", "Slow Wandering", "Romantic Dinner", "Somewhere New"]
 };
 
 const departureDay = 24;
@@ -95,6 +102,9 @@ moodYes.addEventListener("click", () => {
 });
 
 function showSubtopics(category) {
+  selectedCategory = category;
+  selectedSubtopics = [];
+  verdictButton.disabled = true;
   subtopicChips.replaceChildren();
   subtopicsByCategory[category].forEach(label => {
     const chip = document.createElement("button");
@@ -103,9 +113,10 @@ function showSubtopics(category) {
     chip.textContent = label;
     chip.addEventListener("click", () => {
       chip.classList.toggle("subtopic-chip--selected");
-      const picked = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
-      subtopicNote.textContent = picked.length
-        ? `Noted: ${picked.join(" · ")}. Your guy is taking suspiciously detailed notes. 📝❤️`
+      selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
+      verdictButton.disabled = selectedSubtopics.length === 0;
+      subtopicNote.textContent = selectedSubtopics.length
+        ? `Noted: ${selectedSubtopics.join(" · ")}. Your guy is taking suspiciously detailed notes. 📝❤️`
         : "Tap everything that sounds tempting.";
     });
     subtopicChips.append(chip);
@@ -122,6 +133,57 @@ escapeCards.forEach(card => {
     showSubtopics(card.dataset.category);
   });
 });
+
+const destinationProfiles = {
+  "Koh Samui": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":3, "Spa & Bathtub":3, "Beachfront Romance":3, "Somewhere New":2 },
+  "Bali / Ubud": { romantic:5, berserk:2, culture:4, "Quiet & Secluded":3, "Private Pool":3, "Spa & Bathtub":3, "Heritage Streets":2, "Local Food":2, "Slow Wandering":3, "Somewhere New":2 },
+  "Phuket": { romantic:4, berserk:3, culture:1, "Private Pool":3, "Beachfront Romance":3, "Shopping Spree":2, "Night Markets":2 },
+  "Bangkok": { romantic:1, berserk:5, culture:4, "Shopping Spree":3, "Street Food Hunt":3, "Night Markets":3, "Café Hopping":2, "Heritage Streets":2, "Local Food":3 },
+  "Kuala Lumpur": { romantic:1, berserk:5, culture:3, "Shopping Spree":3, "Street Food Hunt":2, "Café Hopping":3, "Local Food":3 },
+  "Ho Chi Minh City": { romantic:1, berserk:4, culture:5, "Shopping Spree":2, "Street Food Hunt":3, "Café Hopping":3, "Heritage Streets":3, "Local Food":3, "Somewhere New":2 },
+  "Penang": { romantic:2, berserk:3, culture:5, "Street Food Hunt":3, "Heritage Streets":3, "Local Food":3, "Slow Wandering":2, "Somewhere New":2 },
+  "Da Nang / Hoi An": { romantic:4, berserk:1, culture:5, "Beachfront Romance":3, "Heritage Streets":3, "Local Food":2, "Slow Wandering":3, "Romantic Dinner":2, "Somewhere New":3 },
+  "Langkawi": { romantic:5, berserk:1, culture:1, "Quiet & Secluded":3, "Private Pool":2, "Spa & Bathtub":2, "Beachfront Romance":3, "Somewhere New":2 }
+};
+
+function calculateMatches() {
+  return Object.entries(destinationProfiles)
+    .map(([name, profile]) => ({
+      name,
+      score: (profile[selectedCategory] || 0) * 3 + selectedSubtopics.reduce((total, topic) => total + (profile[topic] || 0), 0)
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2)
+    .map(item => item.name);
+}
+
+function launchFireworks() {
+  fireworks.replaceChildren();
+  const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
+  for (let index = 0; index < 28; index += 1) {
+    const spark = document.createElement("i");
+    spark.className = "firework";
+    spark.style.setProperty("--angle", `${(360 / 28) * index}deg`);
+    spark.style.setProperty("--distance", `${70 + Math.random() * 115}px`);
+    spark.style.setProperty("--delay", `${Math.random() * .22}s`);
+    spark.style.setProperty("--spark", colors[index % colors.length]);
+    fireworks.append(spark);
+  }
+}
+
+verdictButton.addEventListener("click", () => {
+  const matches = calculateMatches();
+  const subject = encodeURIComponent("Pouty’s getaway verdict 💌");
+  const body = encodeURIComponent(
+    `Main mood: ${selectedCategory}\nSubtopics: ${selectedSubtopics.join(", ")}\nTop matches: ${matches.join(" + ")}`
+  );
+  verdictSend.href = `mailto:harishchamps@gmail.com?subject=${subject}&body=${body}`;
+  localStorage.setItem("poutyVerdict", JSON.stringify({ category:selectedCategory, subtopics:selectedSubtopics, matches }));
+  launchFireworks();
+  verdictDialog.showModal();
+});
+
+verdictClose.addEventListener("click", () => verdictDialog.close());
 
 trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
