@@ -8,6 +8,9 @@ const surprise = document.querySelector("#surprise");
 const moodYes = document.querySelector("#mood-yes");
 const moodNo = document.querySelector("#mood-no");
 const moodMessage = document.querySelector("#mood-message");
+const escapeOptions = document.querySelector("#escape-options");
+const escapeCards = document.querySelectorAll(".escape-card");
+const escapeSelection = document.querySelector("#escape-selection");
 
 const departureDay = 24;
 const birthdayDay = 25;
@@ -68,13 +71,25 @@ function closeCalendar() {
 moodNo.addEventListener("click", () => {
   moodYes.classList.remove("mood-choice__button--selected");
   moodNo.classList.add("mood-choice__button--selected");
-  moodMessage.textContent = "Ugh uh! Pick again! 🤨";
+  moodMessage.hidden = false;
+  moodMessage.classList.remove("mood-reaction--show");
+  void moodMessage.offsetWidth;
+  moodMessage.classList.add("mood-reaction--show");
 });
 
 moodYes.addEventListener("click", () => {
   moodNo.classList.remove("mood-choice__button--selected");
   moodYes.classList.add("mood-choice__button--selected");
-  moodMessage.textContent = "";
+  moodMessage.hidden = true;
+  requestAnimationFrame(() => escapeOptions.scrollIntoView({ behavior: "smooth", block: "start" }));
+});
+
+escapeCards.forEach(card => {
+  card.addEventListener("click", () => {
+    escapeCards.forEach(option => option.classList.remove("escape-card--selected"));
+    card.classList.add("escape-card--selected");
+    escapeSelection.textContent = `${card.dataset.mood} — that sounds very Pouty. ✨`;
+  });
 });
 
 trigger.addEventListener("click", openCalendar);
