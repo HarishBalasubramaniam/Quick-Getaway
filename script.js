@@ -117,8 +117,8 @@ function showSubtopics(category) {
       selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
       verdictButton.disabled = selectedSubtopics.length === 0;
       const categoryNotes = {
-        romantic: "Just you, me, slow mornings and sunsets that make time forget about us. That sounds perfect. 🌅❤️",
-        berserk: "Let’s shop like the bags are weightless, eat like calories are on holiday and call it birthday research. 💸🍜",
+        romantic: "Just you, me, slow mornings and sunsets. Does that sound perfect? 🌅❤️",
+        berserk: "Let’s chase flavours, fill the bags and make a little beautiful chaos together. 🛍️🍜",
         culture: "Let’s wander without a map, share every bite and collect some memories… 🧭🤎"
       };
       subtopicNote.textContent = selectedSubtopics.length
@@ -170,7 +170,7 @@ function calculateMatches() {
 const categoryLabels = {
   romantic: "Be Romantic — Beaches, Villa & Spa",
   berserk: "Go Berserk — Shopping, Street Food & City Vibes",
-  culture: "Go Antique, Feed Me First — Culture, Food & Wandering"
+  culture: "Going Antique, but feed me first! 😛 — Culture, Food & Wandering"
 };
 
 const googleFormCategoryLabels = {
