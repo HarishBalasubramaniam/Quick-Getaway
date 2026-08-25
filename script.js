@@ -117,9 +117,9 @@ function showSubtopics(category) {
       selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
       verdictButton.disabled = selectedSubtopics.length === 0;
       const categoryNotes = {
-        romantic: "Perfect. I’ll bring the sunsets; you just bring the smile I’m travelling for. 🌅❤️",
-        berserk: "Perfect. We’ll shop irresponsibly, eat heroically and call the whole thing romance. 🛍️🍜",
-        culture: "Perfect. Let’s get lost somewhere beautiful and find our way back over dinner. 🏮❤️"
+        romantic: "That sounds like us—slow mornings, soft sunsets and nowhere else we need to be. 🌅❤️",
+        berserk: "Let’s chase flavours, fill the bags and make a little beautiful chaos together. 🛍️🍜",
+        culture: "Let’s wander without a map, share every bite and collect stories that belong only to us. 🏮❤️"
       };
       subtopicNote.textContent = selectedSubtopics.length
         ? `Selected: ${selectedSubtopics.join(" · ")}`
