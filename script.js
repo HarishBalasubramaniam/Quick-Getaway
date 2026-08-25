@@ -81,6 +81,7 @@ moodYes.addEventListener("click", () => {
   moodNo.classList.remove("mood-choice__button--selected");
   moodYes.classList.add("mood-choice__button--selected");
   moodMessage.hidden = true;
+  escapeOptions.hidden = false;
   requestAnimationFrame(() => escapeOptions.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
@@ -96,6 +97,7 @@ trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
 doneButton.addEventListener("click", () => {
   closeCalendar();
+  surprise.hidden = false;
   requestAnimationFrame(() => surprise.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 dialog.addEventListener("click", event => {
