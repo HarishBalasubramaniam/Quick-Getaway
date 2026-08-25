@@ -20,7 +20,6 @@ const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
 const fireworks = document.querySelector("#fireworks");
-const countdownShell = document.querySelector("#countdown-shell");
 const birthdayCountdown = document.querySelector("#birthday-countdown");
 const countdownBirthday = document.querySelector("#countdown-birthday");
 const countdownDays = document.querySelector("#countdown-days");
@@ -31,7 +30,6 @@ const birthdayMoment = new Date("2026-09-25T00:00:00+08:00").getTime();
 let countdownTimerId = null;
 let selectedCategory = "";
 let selectedSubtopics = [];
-let journeyStarted = false;
 
 const subtopicsByCategory = {
   romantic: ["Quiet & Secluded", "Private Pool", "Massage & Spa", "Beachfront Romance", "Somewhere New"],
@@ -85,14 +83,12 @@ function selectReturn(day) {
 }
 
 function openCalendar() {
-  countdownShell.hidden = true;
   dialog.showModal();
   trigger.setAttribute("aria-expanded", "true");
 }
 
 function closeCalendar() {
   dialog.close();
-  releaseCountdown();
   trigger.setAttribute("aria-expanded", "false");
   trigger.focus();
 }
@@ -256,17 +252,6 @@ function startBirthdayCountdown() {
   countdownTimerId = setInterval(updateBirthdayCountdown, 1000);
 }
 
-function dockCountdown(container) {
-  container.append(countdownShell);
-  countdownShell.classList.add("countdown-shell--dialog");
-}
-
-function releaseCountdown() {
-  countdownShell.hidden = !journeyStarted;
-  document.body.append(countdownShell);
-  countdownShell.classList.remove("countdown-shell--dialog");
-}
-
 function launchFireworks() {
   fireworks.replaceChildren();
   const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
@@ -300,14 +285,14 @@ verdictButton.addEventListener("click", () => {
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
   launchFireworks();
-  dockCountdown(verdictDialog);
+  startBirthdayCountdown();
   verdictDialog.showModal();
 });
 
 verdictClose.addEventListener("click", () => {
   verdictDialog.close();
-  journeyStarted = false;
-  releaseCountdown();
+  if (countdownTimerId) clearInterval(countdownTimerId);
+  countdownTimerId = null;
   selectedCategory = "";
   selectedSubtopics = [];
   verdictButton.disabled = true;
@@ -328,8 +313,6 @@ trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
 doneButton.addEventListener("click", () => {
   closeCalendar();
-  journeyStarted = true;
-  countdownShell.hidden = false;
   surprise.hidden = false;
   requestAnimationFrame(() => surprise.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
@@ -338,22 +321,7 @@ dialog.addEventListener("click", event => {
 });
 dialog.addEventListener("close", () => {
   trigger.setAttribute("aria-expanded", "false");
-  releaseCountdown();
 });
-verdictDialog.addEventListener("close", releaseCountdown);
-
-const journeyPages = document.querySelectorAll(".hero, .surprise, .escape-options, .subtopic-page");
-const countdownPageObserver = new IntersectionObserver(entries => {
-  const activePage = entries
-    .filter(entry => entry.isIntersecting && !entry.target.hidden)
-    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!activePage || dialog.open || verdictDialog.open) return;
-  countdownShell.classList.remove("countdown-shell--arrive");
-  void countdownShell.offsetWidth;
-  countdownShell.classList.add("countdown-shell--arrive");
-}, { threshold:[0.45, 0.7] });
-journeyPages.forEach(page => countdownPageObserver.observe(page));
 
 renderCalendar();
-startBirthdayCountdown();
 
