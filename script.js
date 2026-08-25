@@ -31,6 +31,7 @@ const birthdayMoment = new Date("2026-09-25T00:00:00+08:00").getTime();
 let countdownTimerId = null;
 let selectedCategory = "";
 let selectedSubtopics = [];
+let journeyStarted = false;
 
 const subtopicsByCategory = {
   romantic: ["Quiet & Secluded", "Private Pool", "Massage & Spa", "Beachfront Romance", "Somewhere New"],
@@ -91,7 +92,6 @@ function openCalendar() {
 
 function closeCalendar() {
   dialog.close();
-  countdownShell.hidden = false;
   releaseCountdown();
   trigger.setAttribute("aria-expanded", "false");
   trigger.focus();
@@ -262,7 +262,7 @@ function dockCountdown(container) {
 }
 
 function releaseCountdown() {
-  countdownShell.hidden = false;
+  countdownShell.hidden = !journeyStarted;
   document.body.append(countdownShell);
   countdownShell.classList.remove("countdown-shell--dialog");
 }
@@ -306,6 +306,7 @@ verdictButton.addEventListener("click", () => {
 
 verdictClose.addEventListener("click", () => {
   verdictDialog.close();
+  journeyStarted = false;
   releaseCountdown();
   selectedCategory = "";
   selectedSubtopics = [];
@@ -327,6 +328,8 @@ trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
 doneButton.addEventListener("click", () => {
   closeCalendar();
+  journeyStarted = true;
+  countdownShell.hidden = false;
   surprise.hidden = false;
   requestAnimationFrame(() => surprise.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
@@ -335,7 +338,6 @@ dialog.addEventListener("click", event => {
 });
 dialog.addEventListener("close", () => {
   trigger.setAttribute("aria-expanded", "false");
-  countdownShell.hidden = false;
   releaseCountdown();
 });
 verdictDialog.addEventListener("close", releaseCountdown);
