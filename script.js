@@ -218,12 +218,12 @@ function submitGoogleForm(result) {
 function launchFireworks() {
   fireworks.replaceChildren();
   const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
-  for (let index = 0; index < 28; index += 1) {
+  for (let index = 0; index < 56; index += 1) {
     const spark = document.createElement("i");
     spark.className = "firework";
-    spark.style.setProperty("--angle", `${(360 / 28) * index}deg`);
-    spark.style.setProperty("--distance", `${70 + Math.random() * 115}px`);
-    spark.style.setProperty("--delay", `${Math.random() * .22}s`);
+    spark.style.setProperty("--angle", `${(360 / 56) * index}deg`);
+    spark.style.setProperty("--distance", `${85 + Math.random() * 145}px`);
+    spark.style.setProperty("--delay", `${Math.random() * .32}s`);
     spark.style.setProperty("--spark", colors[index % colors.length]);
     fireworks.append(spark);
   }
