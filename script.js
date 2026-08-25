@@ -118,7 +118,7 @@ function showSubtopics(category) {
       verdictButton.disabled = selectedSubtopics.length === 0;
       const categoryNotes = {
         romantic: "Just you, me, slow mornings and sunsets. Does that sound perfect? 🌅❤️",
-        berserk: "Let’s chase flavours, fill the bags and make a little beautiful chaos together. 🛍️🍜",
+        berserk: "Shopping, street food and your hand in mine — a perfect recipe, isn’t it? 🛍️🍜❤️",
         culture: "Let’s wander without a map, share every bite and collect some memories… 🧭🤎"
       };
       subtopicNote.textContent = selectedSubtopics.length
