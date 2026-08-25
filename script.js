@@ -167,19 +167,44 @@ function calculateMatches() {
     .map(item => item.name);
 }
 
+const categoryLabels = {
+  romantic: "Be Romantic — Beaches, Villa & Spa",
+  berserk: "Go Berserk — Shopping, Street Food & City Vibes",
+  culture: "Make Me Cultured, Feed Me First — Culture, Food & Wandering"
+};
+
 const googleFormConfig = {
-  action: "",
-  categoryEntry: "",
-  subtopicsEntry: "",
-  matchesEntry: ""
+  action: "https://docs.google.com/forms/d/e/1FAIpQLScTqvZph6bo1KU10DsAG8EXNVf1uZt-DqjNLOjvRQGLRROxSw/formResponse",
+  departureEntry: "entry.710496997",
+  returnEntry: "entry.24262052",
+  durationEntry: "entry.467304395",
+  readyEntry: "entry.669722799",
+  categoryEntry: "entry.376827372",
+  preferenceEntries: {
+    romantic: "entry.771596186",
+    berserk: "entry.1555155891",
+    culture: "entry.341290519"
+  },
+  allPreferencesEntry: "entry.517397756",
+  bestMatchEntry: "entry.1525153853",
+  secondMatchEntry: "entry.25358909",
+  fullVerdictEntry: "entry.805218220"
 };
 
 function submitGoogleForm(result) {
-  if (!googleFormConfig.action) return false;
   const payload = new FormData();
-  payload.append(googleFormConfig.categoryEntry, result.category);
-  payload.append(googleFormConfig.subtopicsEntry, result.subtopics.join(", "));
-  payload.append(googleFormConfig.matchesEntry, result.matches.join(" + "));
+  payload.append(`${googleFormConfig.departureEntry}_year`, "2026");
+  payload.append(`${googleFormConfig.departureEntry}_month`, "09");
+  payload.append(`${googleFormConfig.departureEntry}_day`, "24");
+  payload.append(googleFormConfig.returnEntry, result.returnDate);
+  payload.append(googleFormConfig.durationEntry, result.duration);
+  payload.append(googleFormConfig.readyEntry, result.ready);
+  payload.append(googleFormConfig.categoryEntry, result.categoryLabel);
+  result.subtopics.forEach(topic => payload.append(googleFormConfig.preferenceEntries[result.category], topic));
+  payload.append(googleFormConfig.allPreferencesEntry, result.subtopics.join("\n"));
+  payload.append(googleFormConfig.bestMatchEntry, result.matches[0] || "");
+  payload.append(googleFormConfig.secondMatchEntry, result.matches[1] || "");
+  payload.append(googleFormConfig.fullVerdictEntry, result.fullVerdict);
   fetch(googleFormConfig.action, { method:"POST", mode:"no-cors", body:payload });
   return true;
 }
@@ -200,7 +225,18 @@ function launchFireworks() {
 
 verdictButton.addEventListener("click", () => {
   const matches = calculateMatches();
-  const result = { category:selectedCategory, subtopics:selectedSubtopics, matches };
+  const categoryLabel = categoryLabels[selectedCategory];
+  const result = {
+    departureDate: "24 September 2026",
+    returnDate: `${returnDay} September 2026`,
+    duration: `${returnDay - departureDay} Days`,
+    ready: "Yes",
+    category: selectedCategory,
+    categoryLabel,
+    subtopics: [...selectedSubtopics],
+    matches,
+    fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}`
+  };
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
   launchFireworks();
