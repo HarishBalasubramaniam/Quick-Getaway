@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=card-writeups-20260825" />
+    <link rel="stylesheet" href="styles.css?v=scored-verdict-20260825" />
   </head>
   <body>
     <div class="journey">
@@ -69,13 +69,23 @@
         </div>
         <p class="escape-options__selection" id="escape-selection" aria-live="polite">Pick the one that feels most like you.</p>
         <div class="subtopic-panel" id="subtopic-panel" hidden>
-          <p class="subtopic-panel__title" id="subtopic-title">Now be suspiciously specific…</p>
+          <p class="subtopic-panel__title" id="subtopic-title">Okay, narrow the chaos 😏</p>
           <div class="subtopic-chips" id="subtopic-chips" role="group" aria-labelledby="subtopic-title"></div>
           <p class="subtopic-panel__note" id="subtopic-note" aria-live="polite">Tap everything that sounds tempting.</p>
+          <button class="verdict-button" id="verdict-button" type="button" disabled>Lock in the chaos <span aria-hidden="true">→</span></button>
         </div>
       </div>
     </section>
     </div>
+
+    <dialog class="verdict-dialog" id="verdict-dialog" aria-labelledby="verdict-title">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+      <p class="verdict-dialog__eyebrow">Verdict received</p>
+      <h2 id="verdict-title">Alright… now your guy’s gonna cook something 😎</h2>
+      <p>Your choices have entered the highly scientific romance machine. Please remain cute and suspicious.</p>
+      <a class="verdict-dialog__send" id="verdict-send" href="mailto:harishchamps@gmail.com">Send my verdict to my guy <span aria-hidden="true">→</span></a>
+      <button class="verdict-dialog__close" id="verdict-close" type="button">Now I gotta wait? Fine. 🙄</button>
+    </dialog>
 
     <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
       <div class="calendar__topline">
@@ -100,6 +110,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=subtopic-cards-20260825"></script>
+    <script src="script.js?v=scored-verdict-20260825"></script>
   </body>
 </html>
