@@ -14,6 +14,8 @@ const escapeSelection = document.querySelector("#escape-selection");
 const subtopicPage = document.querySelector("#subtopic-page");
 const subtopicChips = document.querySelector("#subtopic-chips");
 const subtopicNote = document.querySelector("#subtopic-note");
+const subtopicReaction = document.querySelector("#subtopic-reaction");
+const hero = document.querySelector(".hero");
 const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
@@ -22,7 +24,7 @@ let selectedCategory = "";
 let selectedSubtopics = [];
 
 const subtopicsByCategory = {
-  romantic: ["Quiet & Secluded", "Private Pool", "Spa & Bathtub", "Beachfront Romance", "Somewhere New"],
+  romantic: ["Quiet & Secluded", "Private Pool", "Massage & Spa", "Beachfront Romance", "Somewhere New"],
   berserk: ["Shopping Spree", "Street Food Hunt", "Night Markets", "Café Hopping", "Somewhere New"],
   culture: ["Heritage Streets", "Local Food", "Slow Wandering", "Romantic Dinner", "Somewhere New"]
 };
@@ -115,19 +117,21 @@ function showSubtopics(category) {
       selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
       verdictButton.disabled = selectedSubtopics.length === 0;
       const categoryNotes = {
-        romantic: "Romance requirements selected. Candles have been emotionally notified. 🕯️❤️",
-        berserk: "Chaos selected. The wallet has requested legal representation. 🛍️😮‍💨",
-        culture: "Cultural cravings selected. Your stomach is now the project manager. 🥢🏮"
+        romantic: "Perfect. I’ll bring the sunsets; you just bring the smile I’m travelling for. 🌅❤️",
+        berserk: "Perfect. We’ll shop irresponsibly, eat heroically and call the whole thing romance. 🛍️🍜",
+        culture: "Perfect. Let’s get lost somewhere beautiful and find our way back over dinner. 🏮❤️"
       };
       subtopicNote.textContent = selectedSubtopics.length
-        ? `Selected: ${selectedSubtopics.join(" · ")}. ${categoryNotes[selectedCategory]}`
+        ? `Selected: ${selectedSubtopics.join(" · ")}`
         : "Tap everything that sounds tempting.";
+      subtopicReaction.textContent = selectedSubtopics.length ? categoryNotes[selectedCategory] : "";
     });
     subtopicChips.append(chip);
   });
   subtopicPage.className = `subtopic-page subtopic-page--${category}`;
   subtopicPage.hidden = false;
   subtopicNote.textContent = "Tap everything that sounds tempting.";
+  subtopicReaction.textContent = "";
   requestAnimationFrame(() => subtopicPage.scrollIntoView({ behavior: "smooth", block: "start" }));
 }
 
@@ -203,7 +207,23 @@ verdictButton.addEventListener("click", () => {
   verdictDialog.showModal();
 });
 
-verdictClose.addEventListener("click", () => verdictDialog.close());
+verdictClose.addEventListener("click", () => {
+  verdictDialog.close();
+  selectedCategory = "";
+  selectedSubtopics = [];
+  verdictButton.disabled = true;
+  subtopicChips.replaceChildren();
+  subtopicNote.textContent = "Tap everything that sounds tempting.";
+  subtopicReaction.textContent = "";
+  escapeCards.forEach(card => card.classList.remove("escape-card--selected"));
+  moodYes.classList.remove("mood-choice__button--selected");
+  moodNo.classList.remove("mood-choice__button--selected");
+  moodMessage.hidden = true;
+  surprise.hidden = true;
+  escapeOptions.hidden = true;
+  subtopicPage.hidden = true;
+  requestAnimationFrame(() => hero.scrollIntoView({ behavior: "smooth", block: "start" }));
+});
 
 trigger.addEventListener("click", openCalendar);
 closeButton.addEventListener("click", closeCalendar);
