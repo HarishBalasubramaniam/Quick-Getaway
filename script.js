@@ -11,6 +11,15 @@ const moodMessage = document.querySelector("#mood-message");
 const escapeOptions = document.querySelector("#escape-options");
 const escapeCards = document.querySelectorAll(".escape-card");
 const escapeSelection = document.querySelector("#escape-selection");
+const subtopicPanel = document.querySelector("#subtopic-panel");
+const subtopicChips = document.querySelector("#subtopic-chips");
+const subtopicNote = document.querySelector("#subtopic-note");
+
+const subtopicsByCategory = {
+  romantic: ["Quiet & Secluded", "Private Pool", "Luxurious Bathtub", "Beachfront", "Spa Day", "Sleep In", "Romantic Fine Dining", "Somewhere New"],
+  berserk: ["Shopping Spree", "Street Food Hunt", "Night Markets", "Café Hopping", "Lively & Convenient", "Explore All Day", "Rooftop Drinks", "Somewhere New"],
+  culture: ["Heritage Streets", "Local Food", "Temple & Art Trails", "Slow Wandering", "Hidden Cafés", "Romantic Dinner", "A Little Adventure", "Somewhere New"]
+};
 
 const departureDay = 24;
 const birthdayDay = 25;
@@ -85,11 +94,32 @@ moodYes.addEventListener("click", () => {
   requestAnimationFrame(() => escapeOptions.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
+function showSubtopics(category) {
+  subtopicChips.replaceChildren();
+  subtopicsByCategory[category].forEach(label => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "subtopic-chip";
+    chip.textContent = label;
+    chip.addEventListener("click", () => {
+      chip.classList.toggle("subtopic-chip--selected");
+      const picked = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
+      subtopicNote.textContent = picked.length
+        ? `Noted: ${picked.join(" · ")}. Your guy is taking suspiciously detailed notes. 📝❤️`
+        : "Tap everything that sounds tempting.";
+    });
+    subtopicChips.append(chip);
+  });
+  subtopicPanel.hidden = false;
+  subtopicNote.textContent = "Tap everything that sounds tempting.";
+}
+
 escapeCards.forEach(card => {
   card.addEventListener("click", () => {
     escapeCards.forEach(option => option.classList.remove("escape-card--selected"));
     card.classList.add("escape-card--selected");
     escapeSelection.textContent = card.dataset.response;
+    showSubtopics(card.dataset.category);
   });
 });
 
