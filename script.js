@@ -89,7 +89,7 @@ escapeCards.forEach(card => {
   card.addEventListener("click", () => {
     escapeCards.forEach(option => option.classList.remove("escape-card--selected"));
     card.classList.add("escape-card--selected");
-    escapeSelection.textContent = `${card.dataset.mood} — that sounds very Pouty. ✨`;
+    escapeSelection.textContent = card.dataset.response;
   });
 });
 
