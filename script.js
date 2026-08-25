@@ -303,8 +303,6 @@ verdictButton.addEventListener("click", () => {
 });
 
 verdictClose.addEventListener("click", () => {
-  if (countdownTimerId) clearInterval(countdownTimerId);
-  countdownTimerId = null;
   verdictDialog.close();
   releaseCountdown();
   selectedCategory = "";
