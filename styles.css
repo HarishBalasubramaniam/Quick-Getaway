@@ -27,13 +27,29 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .surprise p,.calendar__eyebrow { color:var(--champagne); font-family:Georgia,"Times New Roman",serif; font-size:.7rem; letter-spacing:.32em; text-transform:uppercase; }
 .surprise h2 { max-width:45rem; margin:1rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(3rem,8vw,6rem); font-weight:400; line-height:.95; }
 .surprise__content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
-.surprise .surprise__intro { margin:0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.45rem,3vw,2.2rem); font-style:italic; font-weight:400; letter-spacing:0; line-height:1.15; text-transform:none; }
+.surprise .surprise__intro { margin:0; color:var(--cream); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.5rem,3vw,2.25rem); font-style:italic; font-weight:300; letter-spacing:.01em; line-height:1.15; text-transform:none; text-shadow:0 2px 18px rgba(15,7,5,.9); }
 .mood-choice { display:flex; width:min(22rem,86vw); gap:.8rem; margin-top:1.5rem; }
 .mood-choice__button { flex:1; border:1px solid rgba(249,237,218,.62); border-radius:999px; padding:.95rem 1.2rem; color:var(--espresso); background:var(--champagne); cursor:pointer; font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; transition:.22s ease; }
 .mood-choice__button--no { color:var(--cream); background:rgba(39,19,12,.34); backdrop-filter:blur(8px); }
 .mood-choice__button:hover,.mood-choice__button:focus-visible { border-color:var(--cream); outline:none; transform:translateY(-2px); }
 .mood-choice__button--selected { box-shadow:0 0 0 3px rgba(218,189,136,.25); }
-.surprise .mood-choice__message { min-height:1.5rem; margin:1rem 0 0; color:var(--rose); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.25rem,3vw,1.6rem); font-style:italic; font-weight:400; letter-spacing:0; text-transform:none; }
+.mood-reaction { display:flex; align-items:center; gap:.8rem; margin-top:1.15rem; border:1px solid rgba(231,161,160,.7); border-radius:1rem; padding:.75rem 1rem; color:var(--cream); background:rgba(53,24,20,.76); box-shadow:0 12px 35px rgba(0,0,0,.3); backdrop-filter:blur(10px); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.2rem,3vw,1.55rem); font-style:italic; letter-spacing:0; text-transform:none; }
+.mood-reaction[hidden] { display:none; }
+.mood-reaction--show { animation:reactionPop .42s cubic-bezier(.22,1.4,.36,1) both; }
+.mood-reaction__emoji { display:grid; width:2.2rem; height:2.2rem; place-items:center; border-radius:50%; background:rgba(249,237,218,.12); font-size:1.3rem; }
+.escape-options { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:5rem 1.5rem; background:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.72)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; text-align:center; }
+.escape-options__content { position:relative; z-index:1; width:min(62rem,100%); }
+.escape-options__eyebrow { margin:0; color:var(--champagne); font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; }
+.escape-options h2 { margin:.8rem auto 2rem; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:300; line-height:.95; }
+.escape-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.escape-card { display:flex; min-height:11rem; flex-direction:column; align-items:flex-start; justify-content:flex-end; border:1px solid rgba(249,237,218,.35); border-radius:1.15rem; padding:1.25rem; color:var(--cream); background:linear-gradient(145deg,rgba(77,43,29,.62),rgba(30,15,10,.72)); backdrop-filter:blur(12px); cursor:pointer; text-align:left; transition:.25s ease; }
+.escape-card:hover,.escape-card:focus-visible { border-color:var(--champagne); outline:none; transform:translateY(-4px); }
+.escape-card--selected { border-color:var(--champagne); background:linear-gradient(145deg,rgba(154,111,69,.68),rgba(52,27,17,.82)); box-shadow:0 0 0 3px rgba(218,189,136,.18); }
+.escape-card > span { font-size:1.8rem; }
+.escape-card strong { margin:.45rem 0 .25rem; font-family:"Cormorant Garamond",Garamond,serif; font-size:1.65rem; font-weight:400; }
+.escape-card small { color:rgba(249,237,218,.74); font-size:.7rem; line-height:1.5; }
+.escape-options__selection { min-height:1.5rem; margin:1.4rem 0 0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.25rem; font-style:italic; }
+@keyframes reactionPop { 0%{opacity:0;transform:scale(.8) rotate(-2deg)} 65%{transform:scale(1.04) rotate(1deg)} 100%{opacity:1;transform:none} }
 .calendar { width:min(31rem,calc(100vw - 1.5rem)); border:1px solid rgba(218,189,136,.72); border-radius:1.25rem; padding:1.35rem; color:var(--cream); background:linear-gradient(145deg,#382219,#1f120e); box-shadow:0 24px 100px rgba(0,0,0,.62); }
 .calendar::backdrop { background:rgba(18,9,6,.7); backdrop-filter:blur(7px); }
 .calendar__topline { display:flex; align-items:flex-start; justify-content:space-between; }
@@ -59,7 +75,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .calendar__done:disabled { border-color:rgba(249,237,218,.25); color:rgba(42,23,16,.48); background:rgba(249,237,218,.42); cursor:not-allowed; opacity:.62; }
 @keyframes rise { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
 @keyframes settle { from{opacity:.55} to{opacity:1} }
-@media(max-width:720px){ .hero,.surprise{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} }
+@media(max-width:720px){ .hero,.surprise{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} .escape-options{background-image:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.76)),url("sunset-villa-original.png")} .escape-grid{grid-template-columns:1fr} .escape-card{min-height:9rem} }
 @media(max-width:520px){ .hero{padding:2.4rem 1.4rem} .hero__content{margin-top:-2vh} h1{font-size:clamp(3.4rem,17vw,5rem)} .hero__statement{font-size:clamp(4.5rem,23vw,7rem);line-height:.76} .hero__note{font-size:clamp(1.55rem,8vw,2.2rem)} }
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
 
