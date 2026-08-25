@@ -11,12 +11,11 @@ const moodMessage = document.querySelector("#mood-message");
 const escapeOptions = document.querySelector("#escape-options");
 const escapeCards = document.querySelectorAll(".escape-card");
 const escapeSelection = document.querySelector("#escape-selection");
-const subtopicPanel = document.querySelector("#subtopic-panel");
+const subtopicPage = document.querySelector("#subtopic-page");
 const subtopicChips = document.querySelector("#subtopic-chips");
 const subtopicNote = document.querySelector("#subtopic-note");
 const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
-const verdictSend = document.querySelector("#verdict-send");
 const verdictClose = document.querySelector("#verdict-close");
 const fireworks = document.querySelector("#fireworks");
 let selectedCategory = "";
@@ -115,14 +114,21 @@ function showSubtopics(category) {
       chip.classList.toggle("subtopic-chip--selected");
       selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
       verdictButton.disabled = selectedSubtopics.length === 0;
+      const categoryNotes = {
+        romantic: "Romance requirements selected. Candles have been emotionally notified. 🕯️❤️",
+        berserk: "Chaos selected. The wallet has requested legal representation. 🛍️😮‍💨",
+        culture: "Cultural cravings selected. Your stomach is now the project manager. 🥢🏮"
+      };
       subtopicNote.textContent = selectedSubtopics.length
-        ? `Noted: ${selectedSubtopics.join(" · ")}. Your guy is taking suspiciously detailed notes. 📝❤️`
+        ? `Selected: ${selectedSubtopics.join(" · ")}. ${categoryNotes[selectedCategory]}`
         : "Tap everything that sounds tempting.";
     });
     subtopicChips.append(chip);
   });
-  subtopicPanel.hidden = false;
+  subtopicPage.className = `subtopic-page subtopic-page--${category}`;
+  subtopicPage.hidden = false;
   subtopicNote.textContent = "Tap everything that sounds tempting.";
+  requestAnimationFrame(() => subtopicPage.scrollIntoView({ behavior: "smooth", block: "start" }));
 }
 
 escapeCards.forEach(card => {
@@ -157,6 +163,23 @@ function calculateMatches() {
     .map(item => item.name);
 }
 
+const googleFormConfig = {
+  action: "",
+  categoryEntry: "",
+  subtopicsEntry: "",
+  matchesEntry: ""
+};
+
+function submitGoogleForm(result) {
+  if (!googleFormConfig.action) return false;
+  const payload = new FormData();
+  payload.append(googleFormConfig.categoryEntry, result.category);
+  payload.append(googleFormConfig.subtopicsEntry, result.subtopics.join(", "));
+  payload.append(googleFormConfig.matchesEntry, result.matches.join(" + "));
+  fetch(googleFormConfig.action, { method:"POST", mode:"no-cors", body:payload });
+  return true;
+}
+
 function launchFireworks() {
   fireworks.replaceChildren();
   const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
@@ -173,12 +196,9 @@ function launchFireworks() {
 
 verdictButton.addEventListener("click", () => {
   const matches = calculateMatches();
-  const subject = encodeURIComponent("Pouty’s getaway verdict 💌");
-  const body = encodeURIComponent(
-    `Main mood: ${selectedCategory}\nSubtopics: ${selectedSubtopics.join(", ")}\nTop matches: ${matches.join(" + ")}`
-  );
-  verdictSend.href = `mailto:harishchamps@gmail.com?subject=${subject}&body=${body}`;
-  localStorage.setItem("poutyVerdict", JSON.stringify({ category:selectedCategory, subtopics:selectedSubtopics, matches }));
+  const result = { category:selectedCategory, subtopics:selectedSubtopics, matches };
+  localStorage.setItem("poutyVerdict", JSON.stringify(result));
+  submitGoogleForm(result);
   launchFireworks();
   verdictDialog.showModal();
 });
