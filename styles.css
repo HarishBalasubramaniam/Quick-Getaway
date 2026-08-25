@@ -37,6 +37,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .mood-reaction[hidden] { display:none; }
 .mood-reaction--show { animation:reactionPop .42s cubic-bezier(.22,1.4,.36,1) both; }
 .mood-reaction__emoji { display:grid; width:2.2rem; height:2.2rem; place-items:center; border-radius:50%; background:rgba(249,237,218,.12); font-size:1.3rem; }
+.surprise[hidden],.escape-options[hidden] { display:none; }
 .escape-options { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:5rem 1.5rem; background:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.72)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; text-align:center; }
 .escape-options__content { position:relative; z-index:1; width:min(62rem,100%); }
 .escape-options__eyebrow { margin:0; color:var(--champagne); font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; }
