@@ -322,6 +322,10 @@ dialog.addEventListener("click", event => {
 dialog.addEventListener("close", () => {
   trigger.setAttribute("aria-expanded", "false");
 });
+verdictDialog.addEventListener("close", () => {
+  if (countdownTimerId) clearInterval(countdownTimerId);
+  countdownTimerId = null;
+});
 
 renderCalendar();
 
