@@ -117,9 +117,9 @@ function showSubtopics(category) {
       selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(item => item.textContent);
       verdictButton.disabled = selectedSubtopics.length === 0;
       const categoryNotes = {
-        romantic: "That sounds like us—slow mornings, soft sunsets and nowhere else we need to be. 🌅❤️",
-        berserk: "Let’s chase flavours, fill the bags and make a little beautiful chaos together. 🛍️🍜",
-        culture: "Let’s wander without a map, share every bite and collect stories that belong only to us. 🏮❤️"
+        romantic: "Just you, me, slow mornings and sunsets that make time forget about us. That sounds perfect. 🌅❤️",
+        berserk: "Let’s shop like the bags are weightless, eat like calories are on holiday and call it birthday research. 💸🍜",
+        culture: "Let’s wander without a map, share every bite and collect some memories… 🧭🤎"
       };
       subtopicNote.textContent = selectedSubtopics.length
         ? `Selected: ${selectedSubtopics.join(" · ")}`
@@ -170,6 +170,12 @@ function calculateMatches() {
 const categoryLabels = {
   romantic: "Be Romantic — Beaches, Villa & Spa",
   berserk: "Go Berserk — Shopping, Street Food & City Vibes",
+  culture: "Go Antique, Feed Me First — Culture, Food & Wandering"
+};
+
+const googleFormCategoryLabels = {
+  romantic: "Be Romantic — Beaches, Villa & Spa",
+  berserk: "Go Berserk — Shopping, Street Food & City Vibes",
   culture: "Make Me Cultured, Feed Me First — Culture, Food & Wandering"
 };
 
@@ -199,7 +205,7 @@ function submitGoogleForm(result) {
   payload.append(googleFormConfig.returnEntry, result.returnDate);
   payload.append(googleFormConfig.durationEntry, result.duration);
   payload.append(googleFormConfig.readyEntry, result.ready);
-  payload.append(googleFormConfig.categoryEntry, result.categoryLabel);
+  payload.append(googleFormConfig.categoryEntry, result.googleFormCategoryLabel);
   result.subtopics.forEach(topic => payload.append(googleFormConfig.preferenceEntries[result.category], topic));
   payload.append(googleFormConfig.allPreferencesEntry, result.subtopics.join("\n"));
   payload.append(googleFormConfig.bestMatchEntry, result.matches[0] || "");
@@ -226,6 +232,7 @@ function launchFireworks() {
 verdictButton.addEventListener("click", () => {
   const matches = calculateMatches();
   const categoryLabel = categoryLabels[selectedCategory];
+  const googleFormCategoryLabel = googleFormCategoryLabels[selectedCategory];
   const result = {
     departureDate: "24 September 2026",
     returnDate: `${returnDay} September 2026`,
@@ -233,6 +240,7 @@ verdictButton.addEventListener("click", () => {
     ready: "Yes",
     category: selectedCategory,
     categoryLabel,
+    googleFormCategoryLabel,
     subtopics: [...selectedSubtopics],
     matches,
     fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}`
