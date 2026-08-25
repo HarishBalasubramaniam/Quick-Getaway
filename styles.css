@@ -77,6 +77,14 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .verdict-dialog > p:not(.verdict-dialog__eyebrow) { position:relative; z-index:2; color:rgba(249,237,218,.76); font-size:.76rem; line-height:1.6; }
 .verdict-dialog__close { position:relative; z-index:2; display:flex; width:100%; justify-content:center; border-radius:999px; padding:.85rem 1rem; cursor:pointer; text-decoration:none; }
 .verdict-dialog__close { margin-top:1.2rem; border:1px solid rgba(249,237,218,.35); color:var(--cream); background:transparent; font-size:.68rem; }
+.verdict-dialog__kiss { display:inline-block; font-size:1.35em; line-height:1; transform:translateY(.06em); }
+.countdown { position:relative; z-index:2; display:grid; grid-template-columns:repeat(4,1fr); margin-top:1.15rem; border:1px solid rgba(218,189,136,.32); border-radius:1rem; padding:.85rem .35rem; background:rgba(18,9,6,.28); }
+.countdown div { display:flex; flex-direction:column; align-items:center; gap:.18rem; }
+.countdown div + div { border-left:1px solid rgba(218,189,136,.22); }
+.countdown strong { color:var(--cream); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.45rem,6vw,2rem); font-weight:400; line-height:1; }
+.countdown span { color:var(--champagne); font-size:.48rem; letter-spacing:.11em; text-transform:uppercase; }
+.countdown__birthday { position:relative; z-index:2; margin:1rem 0 0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.35rem; font-style:italic; }
+.countdown[hidden],.countdown__birthday[hidden] { display:none; }
 .fireworks { position:absolute; inset:0; pointer-events:none; }
 .firework { position:absolute; left:50%; top:45%; width:.35rem; height:.35rem; border-radius:50%; background:var(--spark); animation:fireworkBurst 1.15s ease-out var(--delay) both; transform:rotate(var(--angle)) translateX(0); }
 @keyframes fireworkBurst { 0%{opacity:1;transform:rotate(var(--angle)) translateX(0) scale(1)} 75%{opacity:1} 100%{opacity:0;transform:rotate(var(--angle)) translateX(var(--distance)) scale(.4)} }
