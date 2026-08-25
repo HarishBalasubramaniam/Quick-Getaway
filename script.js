@@ -21,7 +21,6 @@ const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
 const fireworks = document.querySelector("#fireworks");
 const countdownShell = document.querySelector("#countdown-shell");
-const countdownLabel = document.querySelector(".countdown__label");
 const birthdayCountdown = document.querySelector("#birthday-countdown");
 const countdownBirthday = document.querySelector("#countdown-birthday");
 const countdownDays = document.querySelector("#countdown-days");
@@ -231,7 +230,6 @@ function updateBirthdayCountdown() {
   const remaining = birthdayMoment - Date.now();
   if (remaining <= 0) {
     birthdayCountdown.hidden = true;
-    countdownLabel.hidden = true;
     countdownBirthday.hidden = false;
     if (countdownTimerId) clearInterval(countdownTimerId);
     countdownTimerId = null;
@@ -252,7 +250,6 @@ function updateBirthdayCountdown() {
 function startBirthdayCountdown() {
   if (countdownTimerId) clearInterval(countdownTimerId);
   birthdayCountdown.hidden = false;
-  countdownLabel.hidden = false;
   countdownBirthday.hidden = true;
   updateBirthdayCountdown();
   countdownTimerId = setInterval(updateBirthdayCountdown, 1000);
