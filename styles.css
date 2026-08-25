@@ -54,7 +54,6 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .subtopic-page[hidden] { display:none; }
 .subtopic-page::before { content:""; position:absolute; inset:0; background:linear-gradient(rgba(20,9,6,.48),rgba(20,9,6,.72)); }
 .subtopic-page__content { position:relative; z-index:1; width:min(44rem,100%); border:1px solid rgba(249,237,218,.3); border-radius:1.3rem; padding:clamp(1.25rem,4vw,2rem); background:rgba(31,15,10,.58); backdrop-filter:blur(12px); }
-.subtopic-page__eyebrow { margin:0 0 .7rem; color:var(--champagne); font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; }
 .subtopic-page--romantic { background-image:url("category-romantic.png"); }
 .subtopic-page--berserk { background-image:url("category-berserk.png"); }
 .subtopic-page--culture { background-image:url("category-culture.png"); }
@@ -64,6 +63,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .subtopic-chip:hover,.subtopic-chip:focus-visible { border-color:var(--cream); outline:none; transform:translateY(-2px); }
 .subtopic-chip--selected { border-color:var(--champagne); color:var(--espresso); background:var(--champagne); }
 .subtopic-panel__note { min-height:1.2rem; margin:.85rem 0 0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.05rem; font-style:italic; }
+.subtopic-panel__reaction { min-height:1.4rem; margin:.7rem auto 0; border-left:2px solid var(--rose); padding:.35rem .75rem; color:var(--cream); background:linear-gradient(90deg,rgba(231,161,160,.12),transparent); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.15rem; font-style:italic; line-height:1.35; text-align:left; }
 .verdict-button { display:inline-flex; align-items:center; justify-content:center; gap:.7rem; margin-top:1rem; border:1px solid var(--champagne); border-radius:999px; padding:.8rem 1.15rem; color:var(--espresso); background:var(--champagne); cursor:pointer; font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; transition:.2s ease; }
 .verdict-button:disabled { cursor:not-allowed; opacity:.38; }
 .verdict-button:not(:disabled):hover,.verdict-button:not(:disabled):focus-visible { outline:none; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.25); }
