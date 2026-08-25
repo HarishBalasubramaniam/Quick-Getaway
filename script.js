@@ -20,6 +20,7 @@ const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
 const fireworks = document.querySelector("#fireworks");
+const countdownShell = document.querySelector("#countdown-shell");
 const birthdayCountdown = document.querySelector("#birthday-countdown");
 const countdownBirthday = document.querySelector("#countdown-birthday");
 const countdownDays = document.querySelector("#countdown-days");
@@ -83,12 +84,14 @@ function selectReturn(day) {
 }
 
 function openCalendar() {
+  dockCountdown(dialog);
   dialog.showModal();
   trigger.setAttribute("aria-expanded", "true");
 }
 
 function closeCalendar() {
   dialog.close();
+  releaseCountdown();
   trigger.setAttribute("aria-expanded", "false");
   trigger.focus();
 }
@@ -252,6 +255,16 @@ function startBirthdayCountdown() {
   countdownTimerId = setInterval(updateBirthdayCountdown, 1000);
 }
 
+function dockCountdown(container) {
+  container.append(countdownShell);
+  countdownShell.classList.add("countdown-shell--dialog");
+}
+
+function releaseCountdown() {
+  document.body.append(countdownShell);
+  countdownShell.classList.remove("countdown-shell--dialog");
+}
+
 function launchFireworks() {
   fireworks.replaceChildren();
   const colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
@@ -285,7 +298,7 @@ verdictButton.addEventListener("click", () => {
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
   launchFireworks();
-  startBirthdayCountdown();
+  dockCountdown(verdictDialog);
   verdictDialog.showModal();
 });
 
@@ -293,6 +306,7 @@ verdictClose.addEventListener("click", () => {
   if (countdownTimerId) clearInterval(countdownTimerId);
   countdownTimerId = null;
   verdictDialog.close();
+  releaseCountdown();
   selectedCategory = "";
   selectedSubtopics = [];
   verdictButton.disabled = true;
@@ -319,6 +333,11 @@ doneButton.addEventListener("click", () => {
 dialog.addEventListener("click", event => {
   if (event.target === dialog) closeCalendar();
 });
-dialog.addEventListener("close", () => trigger.setAttribute("aria-expanded", "false"));
+dialog.addEventListener("close", () => {
+  trigger.setAttribute("aria-expanded", "false");
+  releaseCountdown();
+});
+verdictDialog.addEventListener("close", releaseCountdown);
 renderCalendar();
+startBirthdayCountdown();
 
