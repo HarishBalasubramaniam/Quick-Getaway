@@ -23,7 +23,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .date-trigger { display:inline-flex; align-items:center; justify-content:center; gap:1rem; min-width:min(19rem,86vw); border:1px solid rgba(249,237,218,.48); border-radius:999px; padding:1rem 1.5rem; background:rgba(39,19,12,.24); backdrop-filter:blur(8px); cursor:pointer; font-family:"Montserrat","Helvetica Neue",sans-serif; font-size:.72rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; transition:.25s ease; }
 .date-trigger:hover,.date-trigger:focus-visible { border-color:var(--champagne); background:rgba(39,19,12,.48); outline:none; transform:translateY(-2px); }
 .date-trigger__arrow { color:var(--champagne); }
-.surprise { position:relative; display:grid; min-height:100svh; place-content:center; overflow:hidden; padding:5rem 2rem; text-align:center; background-color:#1b100b; background-image:url("romantic-sunset-pool-desktop.png"); background-size:cover; background-position:center; background-repeat:no-repeat; text-shadow:0 2px 28px rgba(15,7,5,.7); }
+.surprise { position:relative; display:grid; min-height:100svh; place-content:center; overflow:hidden; padding:5rem 2rem; text-align:center; background-color:#1b100b; background-image:linear-gradient(rgba(20,9,6,.38),rgba(20,9,6,.58)),url("pouty-mystery-transition.jpg"); background-size:cover; background-position:center; background-repeat:no-repeat; text-shadow:0 2px 28px rgba(15,7,5,.82); }
 .surprise p,.calendar__eyebrow { color:var(--champagne); font-family:Georgia,"Times New Roman",serif; font-size:.7rem; letter-spacing:.32em; text-transform:uppercase; }
 .surprise h2 { max-width:45rem; margin:1rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(3rem,8vw,6rem); font-weight:400; line-height:.95; }
 .surprise__content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
@@ -37,12 +37,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .mood-reaction[hidden] { display:none; }
 .mood-reaction--show { animation:reactionPop .42s cubic-bezier(.22,1.4,.36,1) both; }
 .mood-reaction__emoji { display:grid; width:2.2rem; height:2.2rem; place-items:center; border-radius:50%; background:rgba(249,237,218,.12); font-size:1.3rem; }
-.surprise[hidden],.photo-transition[hidden],.escape-options[hidden],.subtopic-page[hidden] { display:none; }
-.photo-transition { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:clamp(3.5rem,7vw,5.5rem) 1.5rem; background:linear-gradient(rgba(25,12,8,.48),rgba(25,12,8,.7)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; }
-.photo-transition__frame { width:min(34rem,100%); margin:0; border:1px solid rgba(218,189,136,.72); border-radius:.8rem; padding:.55rem; background:rgba(31,15,10,.58); box-shadow:0 24px 70px rgba(0,0,0,.42); backdrop-filter:blur(10px); animation:photoReveal .8s cubic-bezier(.22,1,.36,1) both; }
-.photo-transition__frame img { display:block; width:100%; height:auto; border-radius:.45rem; object-fit:contain; }
-.photo-transition__frame figcaption { padding:1rem .7rem .6rem; color:var(--cream); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.2rem,3.4vw,1.65rem); font-style:italic; font-weight:400; line-height:1.2; text-align:center; text-shadow:0 2px 14px rgba(0,0,0,.7); }
-@keyframes photoReveal { from{opacity:0;transform:translateY(24px) scale(.97)} to{opacity:1;transform:none} }
+.surprise[hidden],.escape-options[hidden],.subtopic-page[hidden] { display:none; }
 .escape-options { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:5rem 1.5rem; background:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.72)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; text-align:center; }
 .escape-options__content { position:relative; z-index:1; width:min(62rem,100%); }
 .escape-options__eyebrow { margin:0; color:var(--champagne); font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; }
@@ -123,7 +118,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 @keyframes rise { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
 @keyframes settle { from{opacity:.55} to{opacity:1} }
 @media(max-width:960px){ .escape-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .escape-card:last-child{grid-column:1 / -1} }
-@media(max-width:720px){ .hero,.surprise{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} .escape-options{background-image:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.76)),url("sunset-villa-original.png")} .escape-grid{grid-template-columns:1fr} .escape-card{min-height:9rem} }
+@media(max-width:720px){ .hero{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} .surprise{background-image:linear-gradient(rgba(20,9,6,.34),rgba(20,9,6,.6)),url("pouty-mystery-transition.jpg");background-size:cover;background-position:center;background-repeat:no-repeat} .escape-options{background-image:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.76)),url("sunset-villa-original.png")} .escape-grid{grid-template-columns:1fr} .escape-card{min-height:9rem} }
 @media(max-width:520px){ .hero{padding:2.4rem 1.4rem} .hero__content{margin-top:-2vh} h1{font-size:clamp(3.4rem,17vw,5rem)} .hero__statement{font-size:clamp(4.5rem,23vw,7rem);line-height:.76} .hero__note{font-size:clamp(1.55rem,8vw,2.2rem)} }
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
 
