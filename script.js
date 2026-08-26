@@ -9,7 +9,6 @@ const moodYes = document.querySelector("#mood-yes");
 const moodNo = document.querySelector("#mood-no");
 const moodMessage = document.querySelector("#mood-message");
 const escapeOptions = document.querySelector("#escape-options");
-const photoTransition = document.querySelector("#photo-transition");
 const escapeCards = document.querySelectorAll(".escape-card");
 const escapeSelection = document.querySelector("#escape-selection");
 const subtopicPage = document.querySelector("#subtopic-page");
@@ -107,9 +106,8 @@ moodYes.addEventListener("click", () => {
   moodNo.classList.remove("mood-choice__button--selected");
   moodYes.classList.add("mood-choice__button--selected");
   moodMessage.hidden = true;
-  photoTransition.hidden = false;
   escapeOptions.hidden = false;
-  requestAnimationFrame(() => photoTransition.scrollIntoView({ behavior: "smooth", block: "start" }));
+  requestAnimationFrame(() => escapeOptions.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
 function showSubtopics(category) {
@@ -306,7 +304,6 @@ verdictClose.addEventListener("click", () => {
   moodNo.classList.remove("mood-choice__button--selected");
   moodMessage.hidden = true;
   surprise.hidden = true;
-  photoTransition.hidden = true;
   escapeOptions.hidden = true;
   subtopicPage.hidden = true;
   requestAnimationFrame(() => hero.scrollIntoView({ behavior: "smooth", block: "start" }));
