@@ -37,7 +37,12 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .mood-reaction[hidden] { display:none; }
 .mood-reaction--show { animation:reactionPop .42s cubic-bezier(.22,1.4,.36,1) both; }
 .mood-reaction__emoji { display:grid; width:2.2rem; height:2.2rem; place-items:center; border-radius:50%; background:rgba(249,237,218,.12); font-size:1.3rem; }
-.surprise[hidden],.escape-options[hidden],.subtopic-page[hidden] { display:none; }
+.surprise[hidden],.photo-transition[hidden],.escape-options[hidden],.subtopic-page[hidden] { display:none; }
+.photo-transition { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:clamp(3.5rem,7vw,5.5rem) 1.5rem; background:linear-gradient(rgba(25,12,8,.48),rgba(25,12,8,.7)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; }
+.photo-transition__frame { width:min(34rem,100%); margin:0; border:1px solid rgba(218,189,136,.72); border-radius:.8rem; padding:.55rem; background:rgba(31,15,10,.58); box-shadow:0 24px 70px rgba(0,0,0,.42); backdrop-filter:blur(10px); animation:photoReveal .8s cubic-bezier(.22,1,.36,1) both; }
+.photo-transition__frame img { display:block; width:100%; height:auto; border-radius:.45rem; object-fit:contain; }
+.photo-transition__frame figcaption { padding:1rem .7rem .6rem; color:var(--cream); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.2rem,3.4vw,1.65rem); font-style:italic; font-weight:400; line-height:1.2; text-align:center; text-shadow:0 2px 14px rgba(0,0,0,.7); }
+@keyframes photoReveal { from{opacity:0;transform:translateY(24px) scale(.97)} to{opacity:1;transform:none} }
 .escape-options { position:relative; display:grid; min-height:100svh; place-items:center; overflow:hidden; padding:5rem 1.5rem; background:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.72)),url("romantic-sunset-pool-desktop.png") center/cover no-repeat; text-align:center; }
 .escape-options__content { position:relative; z-index:1; width:min(62rem,100%); }
 .escape-options__eyebrow { margin:0; color:var(--champagne); font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; }
