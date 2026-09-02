@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=faded-mood-box-20260826" />
+    <link rel="stylesheet" href="styles.css?v=stay-picker-20260902" />
   </head>
   <body>
     <div class="journey">
@@ -78,7 +78,46 @@
         <div class="subtopic-chips" id="subtopic-chips" role="group" aria-labelledby="subtopic-title"></div>
         <p class="subtopic-panel__note" id="subtopic-note" aria-live="polite">Tap everything that sounds tempting.</p>
         <p class="subtopic-panel__reaction" id="subtopic-reaction" aria-live="polite"></p>
-        <button class="verdict-button" id="verdict-button" type="button" disabled>Seal our little escape <span aria-hidden="true">→</span></button>
+        <button class="verdict-button" id="verdict-button" type="button" disabled>Now pick where I keep you <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="stays" id="stays-page" hidden aria-labelledby="stays-title">
+      <div class="stays__content">
+        <p class="stays__eyebrow">Step five</p>
+        <h2 id="stays-title">Five rooms. One of them is ours. 😏</h2>
+        <p class="stays__intro">No names. No clues. Don’t ask. Just tell me which one you’d rather wake up in — and which one you’d rather <em>not</em> sleep much in. 🙈</p>
+
+        <div class="stay-grid" id="stay-grid" role="group" aria-labelledby="stays-title">
+          <button class="stay-card" type="button" data-stay="A">
+            <img src="stays/stay-a.jpg" alt="A four-poster bed with a freestanding bathtub beside it" width="1024" height="768" decoding="async" />
+            <span class="stay-card__letter" aria-hidden="true">A</span>
+            <span class="stay-card__line">The one with the tub <em>in</em> the bedroom. Bold. I like it. 🛁</span>
+          </button>
+          <button class="stay-card" type="button" data-stay="B">
+            <img src="stays/stay-b.jpg" alt="A wide, crisp white bed with teal cushions" width="1024" height="343" decoding="async" />
+            <span class="stay-card__letter" aria-hidden="true">B</span>
+            <span class="stay-card__line">Crisp, bright, unfussy. The kind of bed you ruin properly. 😇</span>
+          </button>
+          <button class="stay-card" type="button" data-stay="C">
+            <img src="stays/stay-c.jpg" alt="A large classic room with soft curtains and warm lamplight" width="1024" height="683" decoding="async" />
+            <span class="stay-card__letter" aria-hidden="true">C</span>
+            <span class="stay-card__line">Big, calm and a little old-money. Room to misbehave. 🥂</span>
+          </button>
+          <button class="stay-card" type="button" data-stay="D">
+            <img src="stays/stay-d.jpg" alt="A moody green room with patterned wall and a tub through the doorway" width="1024" height="768" decoding="async" />
+            <span class="stay-card__letter" aria-hidden="true">D</span>
+            <span class="stay-card__line">Dark, green and dramatic. Lights low, obviously. 🕯️</span>
+          </button>
+          <button class="stay-card" type="button" data-stay="E">
+            <img src="stays/stay-e.jpg" alt="A bathtub with a window looking through to the bed" width="1024" height="720" decoding="async" />
+            <span class="stay-card__letter" aria-hidden="true">E</span>
+            <span class="stay-card__line">The bath looks straight at the bed. No comment. 👀</span>
+          </button>
+        </div>
+
+        <p class="stays__note" id="stays-note" aria-live="polite">Tap the one you want. You get exactly one pick, choose wisely. 💅</p>
+        <button class="verdict-button" id="stays-confirm" type="button" disabled>Seal our little escape <span aria-hidden="true">→</span></button>
       </div>
     </section>
     </div>
@@ -123,6 +162,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=photo-page-two-20260826"></script>
+    <script src="script.js?v=stay-picker-20260902"></script>
   </body>
 </html>

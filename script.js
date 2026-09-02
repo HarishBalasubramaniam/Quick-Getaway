@@ -16,6 +16,10 @@ const subtopicChips = document.querySelector("#subtopic-chips");
 const subtopicNote = document.querySelector("#subtopic-note");
 const subtopicReaction = document.querySelector("#subtopic-reaction");
 const hero = document.querySelector(".hero");
+const staysPage = document.querySelector("#stays-page");
+const stayCards = document.querySelectorAll(".stay-card");
+const staysNote = document.querySelector("#stays-note");
+const staysConfirm = document.querySelector("#stays-confirm");
 const verdictButton = document.querySelector("#verdict-button");
 const verdictDialog = document.querySelector("#verdict-dialog");
 const verdictClose = document.querySelector("#verdict-close");
@@ -30,6 +34,16 @@ const birthdayMoment = new Date("2026-09-25T00:00:00+08:00").getTime();
 let countdownTimerId = null;
 let selectedCategory = "";
 let selectedSubtopics = [];
+let selectedStay = "";
+
+// Deliberately letters only — this file is public, so no property names live here.
+const stayReplies = {
+  A: "Tub in the bedroom. Someone’s planning a long soak. 🛁😏",
+  B: "Crisp and bright. You just want something to ruin. 😇",
+  C: "Big and old-money. Room to misbehave, noted. 🥂",
+  D: "Dark and dramatic. Lights low it is. 🕯️",
+  E: "The bath that watches the bed. Bold choice, Pouty. 👀🔥"
+};
 
 const subtopicsByCategory = {
   romantic: ["Quiet & Secluded", "Private Pool", "Massage & Spa", "Beachfront Romance", "Somewhere New"],
@@ -113,6 +127,10 @@ moodYes.addEventListener("click", () => {
 function showSubtopics(category) {
   selectedCategory = category;
   selectedSubtopics = [];
+  selectedStay = "";
+  staysPage.hidden = true;
+  staysConfirm.disabled = true;
+  stayCards.forEach(card => card.classList.remove("stay-card--selected"));
   verdictButton.disabled = true;
   subtopicChips.replaceChildren();
   subtopicsByCategory[category].forEach(label => {
@@ -202,7 +220,11 @@ const googleFormConfig = {
   allPreferencesEntry: "entry.517397756",
   bestMatchEntry: "entry.1525153853",
   secondMatchEntry: "entry.25358909",
-  fullVerdictEntry: "entry.805218220"
+  fullVerdictEntry: "entry.805218220",
+  // Optional: add a short-answer question to the form for the room pick,
+  // then paste its entry id here. Until then the pick is appended to the
+  // full-verdict answer so nothing is lost.
+  stayEntry: ""
 };
 
 function submitGoogleForm(result) {
@@ -219,6 +241,7 @@ function submitGoogleForm(result) {
   payload.append(googleFormConfig.bestMatchEntry, result.matches[0] || "");
   payload.append(googleFormConfig.secondMatchEntry, result.matches[1] || "");
   payload.append(googleFormConfig.fullVerdictEntry, result.fullVerdict);
+  if (googleFormConfig.stayEntry) payload.append(googleFormConfig.stayEntry, result.stayLabel);
   fetch(googleFormConfig.action, { method:"POST", mode:"no-cors", body:payload });
   return true;
 }
@@ -266,7 +289,22 @@ function launchFireworks() {
   }
 }
 
+stayCards.forEach(card => {
+  card.addEventListener("click", () => {
+    stayCards.forEach(option => option.classList.remove("stay-card--selected"));
+    card.classList.add("stay-card--selected");
+    selectedStay = card.dataset.stay;
+    staysNote.textContent = stayReplies[selectedStay] || "";
+    staysConfirm.disabled = false;
+  });
+});
+
 verdictButton.addEventListener("click", () => {
+  staysPage.hidden = false;
+  requestAnimationFrame(() => staysPage.scrollIntoView({ behavior: "smooth", block: "start" }));
+});
+
+staysConfirm.addEventListener("click", () => {
   const matches = calculateMatches();
   const categoryLabel = categoryLabels[selectedCategory];
   const googleFormCategoryLabel = googleFormCategoryLabels[selectedCategory];
@@ -280,7 +318,9 @@ verdictButton.addEventListener("click", () => {
     googleFormCategoryLabel,
     subtopics: [...selectedSubtopics],
     matches,
-    fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}`
+    stay: selectedStay,
+    stayLabel: selectedStay ? `Stay ${selectedStay}` : "",
+    fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}${selectedStay ? ` | Stay ${selectedStay}` : ""}`
   };
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
@@ -295,7 +335,12 @@ verdictClose.addEventListener("click", () => {
   countdownTimerId = null;
   selectedCategory = "";
   selectedSubtopics = [];
+  selectedStay = "";
   verdictButton.disabled = true;
+  staysConfirm.disabled = true;
+  stayCards.forEach(card => card.classList.remove("stay-card--selected"));
+  staysNote.textContent = "Tap the one you want. You get exactly one pick, choose wisely. 💅";
+  staysPage.hidden = true;
   subtopicChips.replaceChildren();
   subtopicNote.textContent = "Tap everything that sounds tempting.";
   subtopicReaction.textContent = "";
