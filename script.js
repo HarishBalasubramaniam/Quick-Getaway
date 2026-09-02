@@ -361,25 +361,12 @@ verdictClose.addEventListener("click", () => {
   verdictDialog.close();
   if (countdownTimerId) clearInterval(countdownTimerId);
   countdownTimerId = null;
-  selectedCategory = "";
-  selectedSubtopics = [];
   selectedStay = "";
-  verdictButton.disabled = true;
   staysConfirm.disabled = true;
   stayCards.forEach(card => card.classList.remove("stay-card--selected"));
   staysNote.textContent = "Tap through the photos. One pick only — choose wisely. 💅";
-  staysPage.hidden = true;
-  subtopicChips.replaceChildren();
-  subtopicNote.textContent = "Tap everything that sounds tempting.";
-  subtopicReaction.textContent = "";
-  escapeCards.forEach(card => card.classList.remove("escape-card--selected"));
-  moodYes.classList.remove("mood-choice__button--selected");
-  moodNo.classList.remove("mood-choice__button--selected");
-  moodMessage.hidden = true;
-  surprise.hidden = true;
-  escapeOptions.hidden = true;
-  subtopicPage.hidden = true;
-  requestAnimationFrame(() => hero.scrollIntoView({ behavior: "smooth", block: "start" }));
+  // Her earlier answers stay locked in, so drop her back on the rooms.
+  requestAnimationFrame(() => staysPage.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
 trigger.addEventListener("click", openCalendar);
@@ -401,4 +388,50 @@ verdictDialog.addEventListener("close", () => {
 });
 
 renderCalendar();
+
+// Pouty already answered all of this on 27 Aug. Replay her choices as
+// already-made so the earlier pages read as settled if she scrolls back,
+// and land her straight on the rooms. The Google Form still requires every
+// one of these values, so they are restored rather than skipped.
+const POUTYS_PICKS = {
+  returnDay: 28,
+  category: "berserk",
+  subtopics: ["Shopping Spree", "Street Food Hunt", "Night Markets", "Café Hopping"]
+};
+
+function replayPoutysPicks() {
+  selectReturn(POUTYS_PICKS.returnDay);
+
+  surprise.hidden = false;
+  moodYes.classList.add("mood-choice__button--selected");
+  moodMessage.hidden = true;
+
+  escapeOptions.hidden = false;
+  const chosenCard = document.querySelector(`.escape-card[data-category="${POUTYS_PICKS.category}"]`);
+  showSubtopics(POUTYS_PICKS.category);
+  if (chosenCard) {
+    chosenCard.classList.add("escape-card--selected");
+    escapeSelection.textContent = chosenCard.dataset.response;
+  }
+
+  subtopicChips.querySelectorAll(".subtopic-chip").forEach(chip => {
+    if (POUTYS_PICKS.subtopics.includes(chip.textContent)) chip.classList.add("subtopic-chip--selected");
+  });
+  selectedSubtopics = [...subtopicChips.querySelectorAll(".subtopic-chip--selected")].map(chip => chip.textContent);
+  subtopicNote.textContent = `Selected: ${selectedSubtopics.join(" · ")}`;
+  subtopicReaction.textContent = "Shopping, street food and your hand in mine — a perfect recipe, isn’t it? 🛍️🍜❤️";
+  verdictButton.disabled = false;
+
+  staysPage.hidden = false;
+}
+
+replayPoutysPicks();
+
+// Jump past the pages she has already finished, without a scroll animation.
+window.addEventListener("load", () => {
+  const previous = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = "auto";
+  staysPage.scrollIntoView({ block: "start" });
+  requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = previous; });
+});
 

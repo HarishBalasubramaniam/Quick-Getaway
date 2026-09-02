@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=stay-picker-v2-20260902" />
+    <link rel="stylesheet" href="styles.css?v=poutys-pick-20260903" />
   </head>
   <body>
     <div class="journey">
@@ -84,7 +84,20 @@
 
     <section class="stays" id="stays-page" hidden aria-labelledby="stays-title">
       <div class="stays__content">
-        <p class="stays__eyebrow">Step five</p>
+        <aside class="poutys-pick" aria-labelledby="poutys-pick-label">
+          <p class="poutys-pick__label" id="poutys-pick-label">Pouty’s Pick <span aria-hidden="true">✨</span></p>
+          <ul class="poutys-pick__list">
+            <li><span class="poutys-pick__icon" aria-hidden="true">📅</span>24–28 Sept</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🛍️</span>Go Berserk</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">👜</span>Shopping Spree</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🍜</span>Street Food Hunt</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🌃</span>Night Markets</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">☕</span>Café Hopping</li>
+          </ul>
+          <p class="poutys-pick__note">All locked in already. Scroll up if you want to admire your own taste. 😌</p>
+        </aside>
+
+        <p class="stays__eyebrow">Last step</p>
         <h2 id="stays-title">Five rooms. One of them is ours. 😏</h2>
         <p class="stays__intro">No names. No clues. Don’t ask. Just tell me which one you’d rather wake up in — and which one you’d rather <em>not</em> sleep much in. 🙈</p>
 
@@ -96,8 +109,9 @@
             <div class="stay-thumbs">
               <button class="stay-thumb is-active" type="button" data-src="stays/stay-a1.jpg" aria-label="Photo 1"><img src="stays/stay-a1.jpg" alt="" decoding="async" /></button>
               <button class="stay-thumb" type="button" data-src="stays/stay-a2.jpg" aria-label="Photo 2"><img src="stays/stay-a2.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-a3.jpg" aria-label="Photo 3"><img src="stays/stay-a3.jpg" alt="" decoding="async" /></button>
             </div>
-            <p class="stay-card__line">A tub sitting right there in the bedroom. Bold. I approve. 🛁</p>
+            <p class="stay-card__line">A tub sitting right there in the bedroom — and a view worth staying in for. 🛁</p>
             <button class="stay-pick" type="button" data-stay="A">Pick this one</button>
           </article>
 
@@ -193,6 +207,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=stay-picker-v2-20260902"></script>
+    <script src="script.js?v=poutys-pick-20260903"></script>
   </body>
 </html>
