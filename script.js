@@ -1,4 +1,4 @@
-const dialog = document.querySelector("#calendar");
+﻿const dialog = document.querySelector("#calendar");
 const trigger = document.querySelector("#date-trigger");
 const closeButton = document.querySelector("#calendar-close");
 const doneButton = document.querySelector("#calendar-done");
@@ -36,13 +36,32 @@ let selectedCategory = "";
 let selectedSubtopics = [];
 let selectedStay = "";
 
-// Deliberately letters only — this file is public, so no property names live here.
+// Property names are base64-encoded so a casual "view source" shows nothing
+// readable. This is obfuscation, not secrecy — decode it and you have them.
+const stayNames = {
+  A: "QW1kYWVuZyBCYW5na29rIFJpdmVyc2lkZSBIb3RlbCAtIFJpdmVyc2lkZSBHcmFuZCBEZWx1eGU=",
+  B: "Q2VudHJlIFBvaW50IFBsdXMgSG90ZWwgU2lsb20gLSBEZWx1eGUgUml2ZXIgVmlldw==",
+  C: "TW9udGllbiBSaXZlcnNpZGUgSG90ZWwgQmFuZ2tvayAtIERlbHV4ZSBLaW5nLCBSaXZlciBWaWV3",
+  D: "VGhlIFF1YXJ0ZXIgQ2hhb3BocmF5YSBieSBVSEcgLSBTdXBlcmlvciBSaXZlciBWaWV3IEtpbmc=",
+  E: "Q2hpbGxheCBIZXJpdGFnZSBIb3RlbCBLaGFvc2FuIC0gUHJlbWllciBEb3VibGU="
+};
+
+function stayName(letter) {
+  const encoded = stayNames[letter];
+  if (!encoded) return "";
+  try {
+    return decodeURIComponent(escape(atob(encoded)));
+  } catch (error) {
+    return "";
+  }
+}
+
 const stayReplies = {
   A: "Tub in the bedroom. Someone’s planning a long soak. 🛁😏",
   B: "Crisp and bright. You just want something to ruin. 😇",
   C: "Big and old-money. Room to misbehave, noted. 🥂",
   D: "Dark and dramatic. Lights low it is. 🕯️",
-  E: "The bath that watches the bed. Bold choice, Pouty. 👀🔥"
+  E: "Whirlpool tub, petals, wine. You’ve thought about this. 🛁🍷🔥"
 };
 
 const subtopicsByCategory = {
@@ -289,11 +308,20 @@ function launchFireworks() {
   }
 }
 
-stayCards.forEach(card => {
-  card.addEventListener("click", () => {
+document.querySelectorAll(".stay-thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    const card = thumb.closest(".stay-card");
+    card.querySelectorAll(".stay-thumb").forEach(other => other.classList.remove("is-active"));
+    thumb.classList.add("is-active");
+    card.querySelector(".stay-card__main").src = thumb.dataset.src;
+  });
+});
+
+document.querySelectorAll(".stay-pick").forEach(button => {
+  button.addEventListener("click", () => {
     stayCards.forEach(option => option.classList.remove("stay-card--selected"));
-    card.classList.add("stay-card--selected");
-    selectedStay = card.dataset.stay;
+    button.closest(".stay-card").classList.add("stay-card--selected");
+    selectedStay = button.dataset.stay;
     staysNote.textContent = stayReplies[selectedStay] || "";
     staysConfirm.disabled = false;
   });
@@ -319,8 +347,8 @@ staysConfirm.addEventListener("click", () => {
     subtopics: [...selectedSubtopics],
     matches,
     stay: selectedStay,
-    stayLabel: selectedStay ? `Stay ${selectedStay}` : "",
-    fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}${selectedStay ? ` | Stay ${selectedStay}` : ""}`
+    stayLabel: selectedStay ? `Stay ${selectedStay} — ${stayName(selectedStay)}` : "",
+    fullVerdict: `${categoryLabel} | ${selectedSubtopics.join(", ")} | ${matches.join(" + ")}${selectedStay ? ` | Stay ${selectedStay} — ${stayName(selectedStay)}` : ""}`
   };
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
@@ -339,7 +367,7 @@ verdictClose.addEventListener("click", () => {
   verdictButton.disabled = true;
   staysConfirm.disabled = true;
   stayCards.forEach(card => card.classList.remove("stay-card--selected"));
-  staysNote.textContent = "Tap the one you want. You get exactly one pick, choose wisely. 💅";
+  staysNote.textContent = "Tap through the photos. One pick only — choose wisely. 💅";
   staysPage.hidden = true;
   subtopicChips.replaceChildren();
   subtopicNote.textContent = "Tap everything that sounds tempting.";

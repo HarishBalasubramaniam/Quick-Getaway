@@ -72,17 +72,25 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .stays h2 { margin:.7rem auto .6rem; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(2rem,5vw,3.4rem); font-weight:400; line-height:1.02; text-wrap:balance; }
 .stays__intro { max-width:38rem; margin:0 auto 1.9rem; color:rgba(249,237,218,.82); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.05rem,2.2vw,1.3rem); font-style:italic; line-height:1.4; text-wrap:balance; }
 .stay-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
-.stay-card { position:relative; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(249,237,218,.32); border-radius:1.1rem; padding:0; color:var(--cream); background:linear-gradient(145deg,rgba(77,43,29,.55),rgba(30,15,10,.72)); cursor:pointer; text-align:left; transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
-.stay-card img { display:block; width:100%; height:13rem; object-fit:cover; }
-.stay-card__letter { position:absolute; left:.7rem; top:.7rem; display:grid; width:2rem; height:2rem; place-items:center; border-radius:50%; color:var(--espresso); background:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.05rem; font-weight:500; box-shadow:0 4px 14px rgba(0,0,0,.35); }
-.stay-card__line { padding:.85rem .95rem 1.05rem; color:rgba(249,237,218,.86); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.02rem; font-style:italic; line-height:1.32; }
-.stay-card:hover,.stay-card:focus-visible { border-color:var(--champagne); outline:none; transform:translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,.34); }
+.stay-card { position:relative; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(249,237,218,.32); border-radius:1.1rem; padding:0; color:var(--cream); background:linear-gradient(145deg,rgba(77,43,29,.55),rgba(30,15,10,.72)); text-align:left; transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
+.stay-card:hover { border-color:rgba(218,189,136,.7); transform:translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,.34); }
+.stay-card__main { display:block; width:100%; height:13.5rem; object-fit:cover; background:rgba(20,10,7,.6); }
+.stay-card__letter { position:absolute; left:.7rem; top:.7rem; z-index:2; display:grid; width:2rem; height:2rem; place-items:center; border-radius:50%; color:var(--espresso); background:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.05rem; font-weight:500; box-shadow:0 4px 14px rgba(0,0,0,.35); }
+.stay-thumbs { display:flex; gap:.4rem; padding:.5rem .55rem 0; }
+.stay-thumb { flex:0 0 auto; overflow:hidden; width:3.4rem; height:2.5rem; border:1px solid rgba(249,237,218,.3); border-radius:.45rem; padding:0; background:none; cursor:pointer; opacity:.6; transition:.2s ease; }
+.stay-thumb img { display:block; width:100%; height:100%; object-fit:cover; }
+.stay-thumb:hover,.stay-thumb:focus-visible { outline:none; opacity:.9; border-color:var(--champagne); }
+.stay-thumb.is-active { opacity:1; border-color:var(--champagne); box-shadow:0 0 0 2px rgba(218,189,136,.28); }
+.stay-card__line { margin:0; padding:.7rem .95rem .85rem; color:rgba(249,237,218,.86); font-family:"Cormorant Garamond",Garamond,serif; font-size:1.02rem; font-style:italic; line-height:1.32; }
+.stay-pick { margin:auto .95rem 1rem; border:1px solid rgba(249,237,218,.45); border-radius:999px; padding:.6rem .9rem; color:var(--cream); background:rgba(39,19,12,.4); cursor:pointer; font-family:"Montserrat","Helvetica Neue",sans-serif; font-size:.6rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; transition:.2s ease; }
+.stay-pick:hover,.stay-pick:focus-visible { border-color:var(--champagne); outline:none; background:rgba(39,19,12,.7); }
 .stay-card--selected { border-color:var(--champagne); box-shadow:0 0 0 3px rgba(218,189,136,.32),0 14px 34px rgba(0,0,0,.36); }
 .stay-card--selected .stay-card__letter { background:var(--cream); }
-.stay-card--selected::after { content:"♥"; position:absolute; right:.7rem; top:.6rem; color:var(--rose); font-size:1.15rem; text-shadow:0 2px 8px rgba(15,7,5,.7); }
+.stay-card--selected .stay-pick { color:var(--espresso); background:var(--champagne); border-color:var(--champagne); }
+.stay-card--selected::after { content:"♥"; position:absolute; right:.7rem; top:.6rem; z-index:2; color:var(--rose); font-size:1.15rem; text-shadow:0 2px 8px rgba(15,7,5,.7); }
 .stays__note { min-height:1.4rem; margin:1.35rem 0 0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.02rem,2vw,1.22rem); font-style:italic; }
-@media(max-width:900px){ .stay-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .stay-card:last-child{grid-column:1 / -1} .stay-card:last-child img{height:11rem} }
-@media(max-width:560px){ .stays{padding:3rem 1.1rem} .stay-grid{grid-template-columns:1fr;gap:.85rem} .stay-card img,.stay-card:last-child img{height:11.5rem} .stay-card__line{font-size:.98rem} }
+@media(max-width:900px){ .stay-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .stay-card:last-child{grid-column:1 / -1} .stay-card:last-child .stay-card__main{height:12rem} }
+@media(max-width:560px){ .stays{padding:3rem 1.1rem} .stay-grid{grid-template-columns:1fr;gap:.85rem} .stay-card__main,.stay-card:last-child .stay-card__main{height:12.5rem} .stay-card__line{font-size:.98rem} .stay-thumb{width:3.9rem;height:2.9rem} .stay-pick{padding:.85rem 1rem;font-size:.64rem} }
 .verdict-button { display:inline-flex; align-items:center; justify-content:center; gap:.7rem; margin-top:1rem; border:1px solid var(--champagne); border-radius:999px; padding:.8rem 1.15rem; color:var(--espresso); background:var(--champagne); cursor:pointer; font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; transition:.2s ease; }
 .verdict-button:disabled { cursor:not-allowed; opacity:.38; }
 .verdict-button:not(:disabled):hover,.verdict-button:not(:disabled):focus-visible { outline:none; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.25); }
