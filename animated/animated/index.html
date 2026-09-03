@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2a1710" />
+    <title>Oi Pouty!! — Just for us</title>
+    <meta name="description" content="A birthday surprise, made just for us." />
+    <link rel="stylesheet" href="styles.css?v=poutys-pick-20260903" />
+  </head>
+  <body>
+    <div class="journey">
+      <div class="journey__blur" aria-hidden="true"></div>
+      <div class="journey__image" aria-hidden="true"></div>
+      <div class="journey__shade" aria-hidden="true"></div>
+
+    <main class="hero">
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
+
+      <section class="hero__content" aria-labelledby="hero-title">
+        <h1 id="hero-title">Oi Pouty!</h1>
+        <p class="hero__eyebrow">A little escape</p>
+        <p class="hero__statement">Just for us</p>
+        <p class="hero__note">Pack your bags, Let’s Go!</p>
+        <span class="hero__rule" aria-hidden="true"></span>
+
+        <button class="date-trigger btn-shine" id="date-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+          <span>Select your Dates</span>
+          <span class="date-trigger__arrow" aria-hidden="true">→</span>
+        </button>
+      </section>
+    </main>
+
+    <section class="surprise" id="surprise" hidden>
+      <div class="surprise__content reveal">
+        <p class="surprise__intro">Umm… 🤔 let’s see what kind of escape Pouty wants.</p>
+        <h2>Ready to pick the mood?</h2>
+        <div class="mood-choice" role="group" aria-label="Ready to pick the mood?">
+          <button class="mood-choice__button" id="mood-yes" type="button">Yes</button>
+          <button class="mood-choice__button mood-choice__button--no" id="mood-no" type="button">No</button>
+        </div>
+        <div class="mood-reaction" id="mood-message" role="status" aria-live="polite" hidden>
+          <span class="mood-reaction__emoji" aria-hidden="true">🙂‍↔️</span>
+          <span>Ugh uh! <strong>Pick again</strong> 🤨</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="escape-options" id="escape-options" aria-labelledby="escape-options-title" hidden>
+      <div class="escape-options__content reveal">
+        <h2 id="escape-options-title">Time to Judge, Pouty 👀</h2>
+        <div class="escape-grid">
+          <button class="escape-card reveal-stagger" type="button" data-category="romantic" data-response="Ah, romance. Excellent choice. 😉 Time for fewer plans and considerably fewer clothes. 😈">
+            <span class="escape-card__icon" aria-hidden="true">🏝️</span><strong>Be Romantic</strong>
+            <small>Beaches, Villa &amp; Spa</small>
+            <span class="escape-card__writeup">Beaches, private villa, sunsets, longer baths—and even longer nights. 😉🔥</span>
+          </button>
+          <button class="escape-card reveal-stagger" type="button" data-category="berserk" data-response="Go berserk it is. I’ll bring strong legs, an empty stomach and emergency shopping-bag hands. 🛍️🍜">
+            <span class="escape-card__icon" aria-hidden="true">🛍️</span><strong>Go Berserk</strong>
+            <small>Shopping, Street Food &amp; City Vibes</small>
+            <span class="escape-card__writeup">City lights, street food, shopping bags—and I’ll have you for dessert. 😏🍰</span>
+          </button>
+          <button class="escape-card reveal-stagger" type="button" data-category="culture" data-response="Old streets, good food and wandering with you? That’s my kind of history lesson. 🧭🥢">
+            <span class="escape-card__icon" aria-hidden="true">🏮</span><strong>Going Antique, but feed me first! 😛</strong>
+            <small>Culture, Food &amp; Wandering</small>
+            <span class="escape-card__writeup">Old streets, shared bites, wandering hands—and steamy discoveries at night. 😏🔥</span>
+          </button>
+        </div>
+        <p class="escape-options__selection" id="escape-selection" aria-live="polite">Pick the one that feels most like you.</p>
+
+      </div>
+    </section>
+
+    <section class="subtopic-page" id="subtopic-page" hidden aria-labelledby="subtopic-title">
+      <div class="subtopic-page__content reveal">
+        <h2 class="subtopic-panel__title" id="subtopic-title">Time to add some details…</h2>
+        <div class="subtopic-chips" id="subtopic-chips" role="group" aria-labelledby="subtopic-title"></div>
+        <p class="subtopic-panel__note" id="subtopic-note" aria-live="polite">Tap everything that sounds tempting.</p>
+        <p class="subtopic-panel__reaction" id="subtopic-reaction" aria-live="polite"></p>
+        <button class="verdict-button btn-shine" id="verdict-button" type="button" disabled>One last thing, Pouty <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="stays" id="stays-page" hidden aria-labelledby="stays-title">
+      <div class="stays__content reveal">
+        <aside class="poutys-pick" aria-labelledby="poutys-pick-label">
+          <p class="poutys-pick__label" id="poutys-pick-label">Pouty’s Pick <span aria-hidden="true">✨</span></p>
+          <ul class="poutys-pick__list">
+            <li><span class="poutys-pick__icon" aria-hidden="true">📅</span>24–28 Sept</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🛍️</span>Go Berserk</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">👜</span>Shopping Spree</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🍜</span>Street Food Hunt</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🌃</span>Night Markets</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">☕</span>Café Hopping</li>
+          </ul>
+          <p class="poutys-pick__note">All locked in already. Scroll up if you want to admire your own taste. 😌</p>
+        </aside>
+
+        <p class="stays__eyebrow">Last step</p>
+        <h2 id="stays-title">Five rooms. One of them is ours. 😏</h2>
+        <p class="stays__intro">No names. No clues. Don’t ask. Just tell me which one you’d rather wake up in — and which one you’d rather <em>not</em> sleep much in. 🙈</p>
+
+        <div class="stay-grid" id="stay-grid" role="group" aria-labelledby="stays-title">
+
+          <article class="stay-card reveal-stagger" data-stay="A">
+            <span class="stay-card__letter" aria-hidden="true">A</span>
+            <img class="stay-card__main" src="stays/stay-a1.jpg" alt="A four-poster bed with a freestanding bathtub beside it" width="1024" height="768" decoding="async" />
+            <div class="stay-thumbs">
+              <button class="stay-thumb is-active" type="button" data-src="stays/stay-a1.jpg" aria-label="Photo 1"><img src="stays/stay-a1.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-a2.jpg" aria-label="Photo 2"><img src="stays/stay-a2.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-a3.jpg" aria-label="Photo 3"><img src="stays/stay-a3.jpg" alt="" decoding="async" /></button>
+            </div>
+            <p class="stay-card__line">A tub sitting right there in the bedroom — and a view worth staying in for. 🛁</p>
+            <button class="stay-pick btn-shine" type="button" data-stay="A">Pick this one</button>
+          </article>
+
+          <article class="stay-card reveal-stagger" data-stay="B">
+            <span class="stay-card__letter" aria-hidden="true">B</span>
+            <img class="stay-card__main" src="stays/stay-b1.jpg" alt="A bright white room with a wide bed and teal cushions" width="1024" height="683" decoding="async" />
+            <div class="stay-thumbs">
+              <button class="stay-thumb is-active" type="button" data-src="stays/stay-b1.jpg" aria-label="Photo 1"><img src="stays/stay-b1.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-b2.jpg" aria-label="Photo 2"><img src="stays/stay-b2.jpg" alt="" decoding="async" /></button>
+            </div>
+            <p class="stay-card__line">Bright, crisp, unfussy. The kind of bed worth ruining. 😇</p>
+            <button class="stay-pick btn-shine" type="button" data-stay="B">Pick this one</button>
+          </article>
+
+          <article class="stay-card reveal-stagger" data-stay="C">
+            <span class="stay-card__letter" aria-hidden="true">C</span>
+            <img class="stay-card__main" src="stays/stay-c1.jpg" alt="A large classic room with soft curtains and warm lamplight" width="1024" height="683" decoding="async" />
+            <div class="stay-thumbs">
+              <button class="stay-thumb is-active" type="button" data-src="stays/stay-c1.jpg" aria-label="Photo 1"><img src="stays/stay-c1.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-c2.jpg" aria-label="Photo 2"><img src="stays/stay-c2.jpg" alt="" decoding="async" /></button>
+            </div>
+            <p class="stay-card__line">Big, calm, a little old-money. Acres of room to misbehave. 🥂</p>
+            <button class="stay-pick btn-shine" type="button" data-stay="C">Pick this one</button>
+          </article>
+
+          <article class="stay-card reveal-stagger" data-stay="D">
+            <span class="stay-card__letter" aria-hidden="true">D</span>
+            <img class="stay-card__main" src="stays/stay-d1.jpg" alt="A moody green room with a patterned wall and a tub through the doorway" width="1024" height="768" decoding="async" />
+            <div class="stay-thumbs">
+              <button class="stay-thumb is-active" type="button" data-src="stays/stay-d1.jpg" aria-label="Photo 1"><img src="stays/stay-d1.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-d2.jpg" aria-label="Photo 2"><img src="stays/stay-d2.jpg" alt="" decoding="async" /></button>
+            </div>
+            <p class="stay-card__line">Dark, green and dramatic. Lights staying low, obviously. 🕯️</p>
+            <button class="stay-pick btn-shine" type="button" data-stay="D">Pick this one</button>
+          </article>
+
+          <article class="stay-card reveal-stagger" data-stay="E">
+            <span class="stay-card__letter" aria-hidden="true">E</span>
+            <img class="stay-card__main" src="stays/stay-e1.jpg" alt="A twin whirlpool bath filled with rose petals, wine and candles" width="1024" height="683" decoding="async" />
+            <div class="stay-thumbs">
+              <button class="stay-thumb is-active" type="button" data-src="stays/stay-e1.jpg" aria-label="Photo 1"><img src="stays/stay-e1.jpg" alt="" decoding="async" /></button>
+              <button class="stay-thumb" type="button" data-src="stays/stay-e2.jpg" aria-label="Photo 2"><img src="stays/stay-e2.jpg" alt="" decoding="async" /></button>
+            </div>
+            <p class="stay-card__line">A proper <em>whirlpool</em> tub. Jets, bubbles, the works — and it’s in the room with the bed. 🛁🍾</p>
+            <button class="stay-pick btn-shine" type="button" data-stay="E">Pick this one</button>
+          </article>
+
+        </div>
+
+        <p class="stays__note" id="stays-note" aria-live="polite">Tap through the photos. One pick only — choose wisely. 💅</p>
+        <button class="verdict-button btn-shine" id="stays-confirm" type="button" disabled>Lock it in, I’ll handle the rest 😘<span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+    </div>
+
+    <dialog class="verdict-dialog" id="verdict-dialog" aria-labelledby="verdict-title">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+      <p class="verdict-dialog__eyebrow">You got it 😉</p>
+      <h2 id="verdict-title">Let your guy cook!! <span class="verdict-dialog__title-emoji" aria-hidden="true">😎</span></h2>
+      <p class="verdict-dialog__message"><span>Your little wish list is safe with me.</span><span>Now let me turn it into a beautiful escape, just for us. ❤️</span></p>
+      <button class="verdict-dialog__close" id="verdict-close" type="button">All you gotta do is wait <span class="verdict-dialog__kiss" aria-hidden="true">😘</span></button>
+      <aside class="countdown-shell" id="countdown-shell" aria-label="Countdown to Pouty’s birthday">
+        <div class="countdown" id="birthday-countdown" role="timer">
+          <div><strong id="countdown-days">00</strong><span>Days</span></div>
+          <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
+          <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
+          <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
+        </div>
+        <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
+      </aside>
+    </dialog>
+
+    <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
+      <div class="calendar__topline">
+        <div>
+          <p class="calendar__eyebrow">Select your dates</p>
+          <h2 id="calendar-title">September 2026</h2>
+        </div>
+        <button class="calendar__close" id="calendar-close" type="button" aria-label="Close calendar">×</button>
+      </div>
+
+      <div class="calendar__weekdays" aria-hidden="true">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div class="calendar__days" id="calendar-days" role="grid" aria-label="September 2026"></div>
+
+      <div class="calendar__legend">
+        <span><i class="legend-start"></i>Departure</span>
+        <span><i class="legend-birthday"></i>Pouty’s birthday</span>
+        <span><i class="legend-return"></i>Your return</span>
+      </div>
+      <p class="calendar__selection" id="calendar-selection" aria-live="polite">24–27 September 2026 · 3 Days</p>
+      <button class="calendar__done btn-shine" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
+    </dialog>
+
+    <script src="script.js?v=poutys-pick-20260903"></script>
+  </body>
+</html>
