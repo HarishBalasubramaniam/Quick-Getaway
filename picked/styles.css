@@ -27,3 +27,6 @@ body[data-chapter="6"] .cinema-image--stay{opacity:.58;transform:scale(1.04)}
 
 /* Generated keepsake artwork for the final surprise. */
 .boarding-art{display:block;width:min(100%,43rem);margin:1rem 0 2rem;border-radius:.45rem;box-shadow:0 1.4rem 5rem rgba(0,0,0,.48);transform:rotate(-1deg);object-fit:cover}@media(max-width:720px){.boarding-art{margin:1rem 0 1.5rem;transform:none;border-radius:.3rem}}
+
+/* Two personalised passes; destination deliberately unreadable. */
+.boarding-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0 2rem}.boarding-duo .boarding-pass{grid-template-columns:minmax(0,1fr) 5.7rem;margin:0;transform:none}.boarding-duo .boarding-main{padding:1.2rem}.boarding-duo .boarding-route{gap:.55rem;margin:.8rem 0}.boarding-duo .boarding-route b{font-size:clamp(1.55rem,3.5vw,2.55rem)}.boarding-duo .boarding-stub{padding:.7rem}.boarding-duo .boarding-stub strong{font-size:1.35rem}.blurred-destination{filter:blur(7px);user-select:none}@media(max-width:720px){.boarding-duo{grid-template-columns:1fr;gap:.8rem}.boarding-duo .boarding-pass{grid-template-columns:minmax(0,1fr) 4.9rem}.boarding-duo .boarding-stub strong{font-size:1.18rem}}
