@@ -328,8 +328,20 @@ document.querySelectorAll(".stay-pick").forEach(button => {
 });
 
 verdictButton.addEventListener("click", () => {
-  staysPage.hidden = false;
-  requestAnimationFrame(() => staysPage.scrollIntoView({ behavior: "smooth", block: "start" }));
+  const matches = calculateMatches();
+  const categoryLabel = categoryLabels[selectedCategory];
+  const result = {
+    departureDate: "24 September 2026",
+    returnDate: `${returnDay} September 2026`,
+    duration: `${returnDay - departureDay} Days`,
+    ready: "Yes",
+    category: selectedCategory,
+    categoryLabel,
+    subtopics: [...selectedSubtopics],
+    matches
+  };
+  localStorage.setItem("poutyVerdict", JSON.stringify(result));
+  window.location.href = "picked/";
 });
 
 staysConfirm.addEventListener("click", () => {
