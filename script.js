@@ -328,20 +328,8 @@ document.querySelectorAll(".stay-pick").forEach(button => {
 });
 
 verdictButton.addEventListener("click", () => {
-  const matches = calculateMatches();
-  const categoryLabel = categoryLabels[selectedCategory];
-  const result = {
-    departureDate: "24 September 2026",
-    returnDate: `${returnDay} September 2026`,
-    duration: `${returnDay - departureDay} Days`,
-    ready: "Yes",
-    category: selectedCategory,
-    categoryLabel,
-    subtopics: [...selectedSubtopics],
-    matches
-  };
-  localStorage.setItem("poutyVerdict", JSON.stringify(result));
-  window.location.href = "picked/";
+  staysPage.hidden = false;
+  requestAnimationFrame(() => staysPage.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
 staysConfirm.addEventListener("click", () => {
@@ -364,9 +352,11 @@ staysConfirm.addEventListener("click", () => {
   };
   localStorage.setItem("poutyVerdict", JSON.stringify(result));
   submitGoogleForm(result);
-  launchFireworks();
-  startBirthdayCountdown();
-  verdictDialog.showModal();
+  staysConfirm.disabled = true;
+  staysConfirm.textContent = "Secret saved — opening your dossier…";
+  window.setTimeout(() => {
+    window.location.href = "picked/";
+  }, 450);
 });
 
 verdictClose.addEventListener("click", () => {
