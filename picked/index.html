@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2a1710" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Pouty’s Pick — all locked in</title>
+    <meta name="description" content="Everything you chose, and how long until it starts." />
+    <link rel="stylesheet" href="../styles.css?v=picked-20260912" />
+  </head>
+  <body>
+    <section class="stays" id="picked-page" aria-labelledby="picked-title">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+      <div class="stays__content">
+
+        <aside class="poutys-pick" aria-labelledby="poutys-pick-label">
+          <p class="poutys-pick__label" id="poutys-pick-label">Pouty’s Pick <span aria-hidden="true">✨</span></p>
+          <ul class="poutys-pick__list">
+            <li><span class="poutys-pick__icon" aria-hidden="true">📅</span>24–28 Sept</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🛍️</span>Go Berserk</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">👜</span>Shopping Spree</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🍜</span>Street Food Hunt</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">🌃</span>Night Markets</li>
+            <li><span class="poutys-pick__icon" aria-hidden="true">☕</span>Café Hopping</li>
+            <li class="poutys-pick__room"><span class="poutys-pick__icon" aria-hidden="true">🛁</span>The whirlpool one</li>
+          </ul>
+          <p class="poutys-pick__note">Every last thing, chosen by you. 😌</p>
+        </aside>
+
+        <p class="stays__eyebrow">All locked in</p>
+        <h2 id="picked-title">It’s done, Pouty. 😎</h2>
+        <p class="stays__intro">The dates, the mood, the mischief — and the room. Every bit of it was your call. The only thing left is the part you don’t get to know yet. 🤫</p>
+
+        <article class="stay-card stay-card--selected stay-card--solo" data-stay="E">
+          <span class="stay-card__letter" aria-hidden="true">E</span>
+          <span class="stay-card__badge">Your pick <span aria-hidden="true">♥</span></span>
+          <img class="stay-card__main" src="../stays/stay-e1.jpg" alt="A twin whirlpool bath filled with rose petals, wine and candles" width="1024" height="683" decoding="async" />
+          <div class="stay-thumbs">
+            <button class="stay-thumb is-active" type="button" data-src="../stays/stay-e1.jpg" aria-label="Photo 1"><img src="../stays/stay-e1.jpg" alt="" decoding="async" /></button>
+            <button class="stay-thumb" type="button" data-src="../stays/stay-e2.jpg" aria-label="Photo 2"><img src="../stays/stay-e2.jpg" alt="" decoding="async" /></button>
+          </div>
+          <p class="stay-card__line">The whirlpool one. Jets, bubbles, and it sits right there beside the bed. Excellent taste, Pouty. 🛁🍾</p>
+        </article>
+
+        <aside class="countdown-shell" aria-label="Countdown to Pouty’s birthday">
+          <p class="countdown__label">Until it’s your birthday <span aria-hidden="true">🎂</span></p>
+          <div class="countdown" id="birthday-countdown" role="timer">
+            <div><strong id="countdown-days">00</strong><span>Days</span></div>
+            <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
+            <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
+            <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
+          </div>
+          <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
+        </aside>
+
+        <p class="stays__signoff">Now let your guy cook. <span aria-hidden="true">😎</span> All you gotta do is wait. <span class="stays__kiss" aria-hidden="true">😘</span></p>
+      </div>
+    </section>
+
+    <script>
+      // Flick between the two photos of her room.
+      document.querySelectorAll(".stay-thumb").forEach(function (thumb) {
+        thumb.addEventListener("click", function () {
+          var card = thumb.closest(".stay-card");
+          card.querySelectorAll(".stay-thumb").forEach(function (other) {
+            other.classList.remove("is-active");
+          });
+          thumb.classList.add("is-active");
+          card.querySelector(".stay-card__main").src = thumb.dataset.src;
+        });
+      });
+
+      var birthdayMoment = new Date("2026-09-25T00:00:00+08:00").getTime();
+      var countdown = document.querySelector("#birthday-countdown");
+      var birthdayNote = document.querySelector("#countdown-birthday");
+      var cells = {
+        days: document.querySelector("#countdown-days"),
+        hours: document.querySelector("#countdown-hours"),
+        minutes: document.querySelector("#countdown-minutes"),
+        seconds: document.querySelector("#countdown-seconds")
+      };
+      var timerId = null;
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function tick() {
+        var remaining = birthdayMoment - Date.now();
+        if (remaining <= 0) {
+          countdown.hidden = true;
+          birthdayNote.hidden = false;
+          if (timerId) clearInterval(timerId);
+          timerId = null;
+          return;
+        }
+        var total = Math.floor(remaining / 1000);
+        cells.days.textContent = pad(Math.floor(total / 86400));
+        cells.hours.textContent = pad(Math.floor((total % 86400) / 3600));
+        cells.minutes.textContent = pad(Math.floor((total % 3600) / 60));
+        cells.seconds.textContent = pad(total % 60);
+      }
+
+      tick();
+      timerId = setInterval(tick, 1000);
+
+      // No requestAnimationFrame here: it never runs while a tab is in the
+      // background, so opening this link from a chat app would show no sparks.
+      (function sparkle() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var host = document.querySelector("#fireworks");
+        var colors = ["#dabd88", "#f9edda", "#e7a1a0", "#f2a85e"];
+        for (var index = 0; index < 56; index += 1) {
+          var spark = document.createElement("i");
+          spark.className = "firework";
+          spark.style.setProperty("--angle", (360 / 56) * index + "deg");
+          spark.style.setProperty("--distance", 85 + Math.random() * 145 + "px");
+          spark.style.setProperty("--delay", Math.random() * 0.32 + "s");
+          spark.style.setProperty("--spark", colors[index % colors.length]);
+          host.append(spark);
+        }
+      })();
+    </script>
+  </body>
+</html>
