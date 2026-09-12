@@ -24,7 +24,7 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .date-trigger:hover,.date-trigger:focus-visible { border-color:var(--champagne); background:rgba(39,19,12,.48); outline:none; transform:translateY(-2px); }
 .date-trigger__arrow { color:var(--champagne); }
 .surprise { position:relative; display:grid; min-height:100svh; grid-template-rows:minmax(55svh,1fr) auto; overflow:hidden; padding:0; text-align:center; background:#1b100b; text-shadow:0 2px 24px rgba(15,7,5,.82); }
-.surprise::before { content:""; grid-row:1; background-image:linear-gradient(rgba(20,9,6,.03),rgba(20,9,6,.14)),url("pouty-mystery-transition.jpg"); background-position:center; background-repeat:no-repeat; background-size:cover; }
+.surprise::before { content:""; grid-row:1; background-image:linear-gradient(rgba(28,14,10,.55),rgba(18,9,6,.78)),url("romantic-sunset-villa.webp"); background-position:center; background-repeat:no-repeat; background-size:cover; }
 .surprise p,.calendar__eyebrow { color:var(--champagne); font-family:Georgia,"Times New Roman",serif; font-size:.7rem; letter-spacing:.32em; text-transform:uppercase; }
 .surprise h2 { max-width:32rem; margin:.5rem 0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:400; line-height:1; text-wrap:balance; }
 .surprise__content { position:relative; z-index:1; grid-row:2; display:flex; width:min(46rem,calc(100% - 2rem)); flex-direction:column; align-items:center; justify-self:center; margin:1rem auto 1.25rem; border:1px solid rgba(249,237,218,.28); border-radius:1.25rem; padding:clamp(1.2rem,2.8vw,1.65rem) 1.25rem clamp(1.65rem,3.5vw,2.2rem); background:linear-gradient(145deg,rgba(67,37,25,.76),rgba(31,16,11,.82)); box-shadow:0 16px 42px rgba(8,3,2,.34),inset 0 1px 0 rgba(255,255,255,.05); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
@@ -95,6 +95,21 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 .stay-card--selected .stay-card__letter { background:var(--cream); }
 .stay-card--selected .stay-pick { color:var(--espresso); background:var(--champagne); border-color:var(--champagne); }
 .stay-card--selected::after { content:"♥"; position:absolute; right:.7rem; top:.6rem; z-index:2; color:var(--rose); font-size:1.15rem; text-shadow:0 2px 8px rgba(15,7,5,.7); }
+.poutys-pick__room { border-color:rgba(218,189,136,.7)!important; color:var(--espresso)!important; background:var(--champagne)!important; font-weight:500; }
+.stay-card--solo { width:min(34rem,100%); margin:0 auto; }
+.stay-card--solo .stay-card__main { height:min(21rem,52vh); }
+.stay-card--solo .stay-card__line { padding:.85rem 1.1rem 1.15rem; font-size:1.1rem; }
+.stay-card__badge { position:absolute; right:.7rem; top:.7rem; z-index:2; border-radius:999px; padding:.3rem .6rem; color:var(--espresso); background:var(--champagne); box-shadow:0 4px 14px rgba(0,0,0,.35); font-family:"Montserrat","Helvetica Neue",sans-serif; font-size:.55rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; }
+.stay-card--selected.stay-card--solo::after { content:none; }
+.countdown__label { margin:0 0 .6rem; color:var(--champagne); font-family:"Montserrat","Helvetica Neue",sans-serif; font-size:.58rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase; }
+.stays .countdown-shell { width:min(34rem,100%); margin:1.9rem auto 0; }
+.stays .countdown { padding:1rem .4rem .9rem; border-radius:1.1rem; }
+.stays .countdown strong { font-size:clamp(1.6rem,5vw,2.3rem); }
+.stays .countdown span { margin-top:.3rem; font-size:.52rem; letter-spacing:.16em; }
+.stays .countdown__birthday { margin-top:.8rem; font-size:1.25rem; }
+.stays__signoff { margin:1.8rem auto 0; color:var(--cream); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.2rem,2.6vw,1.6rem); font-style:italic; text-wrap:balance; }
+.stays__kiss { display:inline-block; margin-left:.12em; font-size:1.5em; line-height:.7; vertical-align:-.08em; filter:drop-shadow(0 6px 12px rgba(231,161,160,.4)); transform-origin:center; animation:kissOut 1.35s cubic-bezier(.2,1.3,.3,1) infinite alternate; }
+@media(max-width:560px){ .stay-card--solo .stay-card__main{height:15rem} .stays .countdown strong{font-size:1.55rem} .stays__signoff{font-size:1.12rem} }
 .stays__note { min-height:1.4rem; margin:1.35rem 0 0; color:var(--champagne); font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(1.02rem,2vw,1.22rem); font-style:italic; }
 @media(max-width:900px){ .stay-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .stay-card:last-child{grid-column:1 / -1} .stay-card:last-child .stay-card__main{height:12rem} }
 @media(max-width:560px){ .stays{padding:3rem 1.1rem} .stay-grid{grid-template-columns:1fr;gap:.85rem} .stay-card__main,.stay-card:last-child .stay-card__main{height:12.5rem} .stay-card__line{font-size:.98rem} .stay-thumb{width:3.9rem;height:2.9rem} .stay-pick{padding:.85rem 1rem;font-size:.64rem} }
@@ -152,7 +167,10 @@ h1 { margin:0; font-family:"Cormorant Garamond",Garamond,serif; font-size:clamp(
 @keyframes rise { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
 @keyframes settle { from{opacity:.55} to{opacity:1} }
 @media(max-width:960px){ .escape-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .escape-card:last-child{grid-column:1 / -1} }
-@media(max-width:720px){ .hero{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} .surprise{grid-template-rows:minmax(56svh,1fr) auto} .surprise::before{background-image:linear-gradient(rgba(20,9,6,.02),rgba(20,9,6,.1)),url("pouty-mystery-transition.jpg");background-position:center 42%;background-size:cover} .surprise__content{width:calc(100% - 1.5rem);margin:.75rem auto 1rem;padding:1.15rem 1rem 1.75rem;border-radius:1rem} .surprise h2{font-size:clamp(1.75rem,8vw,2.35rem)} .surprise .surprise__intro{font-size:clamp(1.05rem,5.2vw,1.35rem)} .mood-choice{width:min(18rem,100%)} .escape-options{background-image:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.76)),url("sunset-villa-original.png")} .escape-grid{grid-template-columns:1fr} .escape-card{min-height:9rem} }
+@media(max-width:720px){ .hero{background-color:#1b100b;background-image:url("sunset-villa-original.png");background-size:cover;background-position:center;background-repeat:no-repeat} .surprise{grid-template-rows:minmax(56svh,1fr) auto} .surprise::before{background-image:linear-gradient(rgba(28,14,10,.5),rgba(18,9,6,.75)),url("romantic-sunset-villa.webp");background-position:center 42%;background-size:cover} .surprise__content{width:calc(100% - 1.5rem);margin:.75rem auto 1rem;padding:1.15rem 1rem 1.75rem;border-radius:1rem} .surprise h2{font-size:clamp(1.75rem,8vw,2.35rem)} .surprise .surprise__intro{font-size:clamp(1.05rem,5.2vw,1.35rem)} .mood-choice{width:min(18rem,100%)} .escape-options{background-image:linear-gradient(rgba(25,12,8,.55),rgba(25,12,8,.76)),url("sunset-villa-original.png")} .escape-grid{grid-template-columns:1fr} .escape-card{min-height:9rem} }
 @media(max-width:520px){ .hero{padding:2.4rem 1.4rem} .hero__content{margin-top:-2vh} h1{font-size:clamp(3.4rem,17vw,5rem)} .hero__statement{font-size:clamp(4.5rem,23vw,7rem);line-height:.76} .hero__note{font-size:clamp(1.55rem,8vw,2.2rem)} }
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
 
+
+.stays .fireworks { z-index:3; }
+.stays .firework { top:38%; }

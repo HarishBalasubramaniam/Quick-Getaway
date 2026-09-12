@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2a1710" />
     <title>Oi Pouty!! — Just for us</title>
     <meta name="description" content="A birthday surprise, made just for us." />
-    <link rel="stylesheet" href="styles.css?v=poutys-pick-20260903" />
+    <link rel="stylesheet" href="styles.css?v=locked-in-20260903" />
   </head>
   <body>
     <div class="journey">
@@ -78,11 +78,12 @@
         <div class="subtopic-chips" id="subtopic-chips" role="group" aria-labelledby="subtopic-title"></div>
         <p class="subtopic-panel__note" id="subtopic-note" aria-live="polite">Tap everything that sounds tempting.</p>
         <p class="subtopic-panel__reaction" id="subtopic-reaction" aria-live="polite"></p>
-        <button class="verdict-button" id="verdict-button" type="button" disabled>One last thing, Pouty <span aria-hidden="true">→</span></button>
+        <button class="verdict-button" id="verdict-button" type="button">See what you ended up with <span aria-hidden="true">→</span></button>
       </div>
     </section>
 
-    <section class="stays" id="stays-page" hidden aria-labelledby="stays-title">
+    <section class="stays" id="stays-page" aria-labelledby="stays-title">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
       <div class="stays__content">
         <aside class="poutys-pick" aria-labelledby="poutys-pick-label">
           <p class="poutys-pick__label" id="poutys-pick-label">Pouty’s Pick <span aria-hidden="true">✨</span></p>
@@ -93,96 +94,41 @@
             <li><span class="poutys-pick__icon" aria-hidden="true">🍜</span>Street Food Hunt</li>
             <li><span class="poutys-pick__icon" aria-hidden="true">🌃</span>Night Markets</li>
             <li><span class="poutys-pick__icon" aria-hidden="true">☕</span>Café Hopping</li>
+            <li class="poutys-pick__room"><span class="poutys-pick__icon" aria-hidden="true">🛁</span>The whirlpool one</li>
           </ul>
-          <p class="poutys-pick__note">All locked in already. Scroll up if you want to admire your own taste. 😌</p>
+          <p class="poutys-pick__note">Every last thing, chosen by you. Scroll up if you want to admire your own taste. 😌</p>
         </aside>
 
-        <p class="stays__eyebrow">Last step</p>
-        <h2 id="stays-title">Five rooms. One of them is ours. 😏</h2>
-        <p class="stays__intro">No names. No clues. Don’t ask. Just tell me which one you’d rather wake up in — and which one you’d rather <em>not</em> sleep much in. 🙈</p>
+        <p class="stays__eyebrow">All locked in</p>
+        <h2 id="stays-title">It’s done, Pouty. 😎</h2>
+        <p class="stays__intro">The dates, the mood, the mischief — and the room. Every bit of it was your call. The only thing left is the part you don’t get to know yet. 🤫</p>
 
-        <div class="stay-grid" id="stay-grid" role="group" aria-labelledby="stays-title">
+        <article class="stay-card stay-card--selected stay-card--solo" data-stay="E">
+          <span class="stay-card__letter" aria-hidden="true">E</span>
+          <span class="stay-card__badge">Your pick <span aria-hidden="true">♥</span></span>
+          <img class="stay-card__main" src="stays/stay-e1.jpg" alt="A twin whirlpool bath filled with rose petals, wine and candles" width="1024" height="683" decoding="async" />
+          <div class="stay-thumbs">
+            <button class="stay-thumb is-active" type="button" data-src="stays/stay-e1.jpg" aria-label="Photo 1"><img src="stays/stay-e1.jpg" alt="" decoding="async" /></button>
+            <button class="stay-thumb" type="button" data-src="stays/stay-e2.jpg" aria-label="Photo 2"><img src="stays/stay-e2.jpg" alt="" decoding="async" /></button>
+          </div>
+          <p class="stay-card__line">The whirlpool one. Jets, bubbles, and it sits right there beside the bed. Excellent taste, Pouty. 🛁🍾</p>
+        </article>
 
-          <article class="stay-card" data-stay="A">
-            <span class="stay-card__letter" aria-hidden="true">A</span>
-            <img class="stay-card__main" src="stays/stay-a1.jpg" alt="A four-poster bed with a freestanding bathtub beside it" width="1024" height="768" decoding="async" />
-            <div class="stay-thumbs">
-              <button class="stay-thumb is-active" type="button" data-src="stays/stay-a1.jpg" aria-label="Photo 1"><img src="stays/stay-a1.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-a2.jpg" aria-label="Photo 2"><img src="stays/stay-a2.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-a3.jpg" aria-label="Photo 3"><img src="stays/stay-a3.jpg" alt="" decoding="async" /></button>
-            </div>
-            <p class="stay-card__line">A tub sitting right there in the bedroom — and a view worth staying in for. 🛁</p>
-            <button class="stay-pick" type="button" data-stay="A">Pick this one</button>
-          </article>
+        <aside class="countdown-shell" id="countdown-shell" aria-label="Countdown to Pouty’s birthday">
+          <p class="countdown__label">Until it’s your birthday <span aria-hidden="true">🎂</span></p>
+          <div class="countdown" id="birthday-countdown" role="timer">
+            <div><strong id="countdown-days">00</strong><span>Days</span></div>
+            <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
+            <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
+            <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
+          </div>
+          <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
+        </aside>
 
-          <article class="stay-card" data-stay="B">
-            <span class="stay-card__letter" aria-hidden="true">B</span>
-            <img class="stay-card__main" src="stays/stay-b1.jpg" alt="A bright white room with a wide bed and teal cushions" width="1024" height="683" decoding="async" />
-            <div class="stay-thumbs">
-              <button class="stay-thumb is-active" type="button" data-src="stays/stay-b1.jpg" aria-label="Photo 1"><img src="stays/stay-b1.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-b2.jpg" aria-label="Photo 2"><img src="stays/stay-b2.jpg" alt="" decoding="async" /></button>
-            </div>
-            <p class="stay-card__line">Bright, crisp, unfussy. The kind of bed worth ruining. 😇</p>
-            <button class="stay-pick" type="button" data-stay="B">Pick this one</button>
-          </article>
-
-          <article class="stay-card" data-stay="C">
-            <span class="stay-card__letter" aria-hidden="true">C</span>
-            <img class="stay-card__main" src="stays/stay-c1.jpg" alt="A large classic room with soft curtains and warm lamplight" width="1024" height="683" decoding="async" />
-            <div class="stay-thumbs">
-              <button class="stay-thumb is-active" type="button" data-src="stays/stay-c1.jpg" aria-label="Photo 1"><img src="stays/stay-c1.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-c2.jpg" aria-label="Photo 2"><img src="stays/stay-c2.jpg" alt="" decoding="async" /></button>
-            </div>
-            <p class="stay-card__line">Big, calm, a little old-money. Acres of room to misbehave. 🥂</p>
-            <button class="stay-pick" type="button" data-stay="C">Pick this one</button>
-          </article>
-
-          <article class="stay-card" data-stay="D">
-            <span class="stay-card__letter" aria-hidden="true">D</span>
-            <img class="stay-card__main" src="stays/stay-d1.jpg" alt="A moody green room with a patterned wall and a tub through the doorway" width="1024" height="768" decoding="async" />
-            <div class="stay-thumbs">
-              <button class="stay-thumb is-active" type="button" data-src="stays/stay-d1.jpg" aria-label="Photo 1"><img src="stays/stay-d1.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-d2.jpg" aria-label="Photo 2"><img src="stays/stay-d2.jpg" alt="" decoding="async" /></button>
-            </div>
-            <p class="stay-card__line">Dark, green and dramatic. Lights staying low, obviously. 🕯️</p>
-            <button class="stay-pick" type="button" data-stay="D">Pick this one</button>
-          </article>
-
-          <article class="stay-card" data-stay="E">
-            <span class="stay-card__letter" aria-hidden="true">E</span>
-            <img class="stay-card__main" src="stays/stay-e1.jpg" alt="A twin whirlpool bath filled with rose petals, wine and candles" width="1024" height="683" decoding="async" />
-            <div class="stay-thumbs">
-              <button class="stay-thumb is-active" type="button" data-src="stays/stay-e1.jpg" aria-label="Photo 1"><img src="stays/stay-e1.jpg" alt="" decoding="async" /></button>
-              <button class="stay-thumb" type="button" data-src="stays/stay-e2.jpg" aria-label="Photo 2"><img src="stays/stay-e2.jpg" alt="" decoding="async" /></button>
-            </div>
-            <p class="stay-card__line">A proper <em>whirlpool</em> tub. Jets, bubbles, the works — and it’s in the room with the bed. 🛁🍾</p>
-            <button class="stay-pick" type="button" data-stay="E">Pick this one</button>
-          </article>
-
-        </div>
-
-        <p class="stays__note" id="stays-note" aria-live="polite">Tap through the photos. One pick only — choose wisely. 💅</p>
-        <button class="verdict-button" id="stays-confirm" type="button" disabled>Lock it in, I’ll handle the rest 😘<span aria-hidden="true">→</span></button>
+        <p class="stays__signoff">Now let your guy cook. <span aria-hidden="true">😎</span> All you gotta do is wait. <span class="stays__kiss" aria-hidden="true">😘</span></p>
       </div>
     </section>
     </div>
-
-    <dialog class="verdict-dialog" id="verdict-dialog" aria-labelledby="verdict-title">
-      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
-      <p class="verdict-dialog__eyebrow">You got it 😉</p>
-      <h2 id="verdict-title">Let your guy cook!! <span class="verdict-dialog__title-emoji" aria-hidden="true">😎</span></h2>
-      <p class="verdict-dialog__message"><span>Your little wish list is safe with me.</span><span>Now let me turn it into a beautiful escape, just for us. ❤️</span></p>
-      <button class="verdict-dialog__close" id="verdict-close" type="button">All you gotta do is wait <span class="verdict-dialog__kiss" aria-hidden="true">😘</span></button>
-      <aside class="countdown-shell" id="countdown-shell" aria-label="Countdown to Pouty’s birthday">
-        <div class="countdown" id="birthday-countdown" role="timer">
-          <div><strong id="countdown-days">00</strong><span>Days</span></div>
-          <div><strong id="countdown-hours">00</strong><span>Hours</span></div>
-          <div><strong id="countdown-minutes">00</strong><span>Minutes</span></div>
-          <div><strong id="countdown-seconds">00</strong><span>Seconds</span></div>
-        </div>
-        <p class="countdown__birthday" id="countdown-birthday" hidden>It’s Pouty’s birthday! 🎂❤️</p>
-      </aside>
-    </dialog>
 
     <dialog class="calendar" id="calendar" aria-labelledby="calendar-title">
       <div class="calendar__topline">
@@ -207,6 +153,6 @@
       <button class="calendar__done" id="calendar-done" type="button">Let the Surprise Begin <span aria-hidden="true">→</span></button>
     </dialog>
 
-    <script src="script.js?v=poutys-pick-20260903"></script>
+    <script src="script.js?v=locked-in-20260903"></script>
   </body>
 </html>
