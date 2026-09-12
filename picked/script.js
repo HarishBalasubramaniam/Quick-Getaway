@@ -1,0 +1,31 @@
+const result = (() => { try { return JSON.parse(localStorage.getItem("poutyVerdict") || "null"); } catch { return null; } })();
+const moodNames={romantic:"Be Romantic — beaches, villa & spa",berserk:"Go Berserk — shopping, street food & city vibes",culture:"Going Antique, but feed me first! 😛"};
+const rooms=[
+  {id:"A",line:"A tub sitting right there in the bedroom — and a view worth staying in for. 🛁",images:["stay-a1.jpg","stay-a2.jpg","stay-a3.jpg"]},
+  {id:"B",line:"Bright, crisp, unfussy. The kind of bed worth ruining. 😇",images:["stay-b1.jpg","stay-b2.jpg"]},
+  {id:"C",line:"Big, calm, a little old-money. Acres of room to misbehave. 🥂",images:["stay-c1.jpg","stay-c2.jpg"]},
+  {id:"D",line:"Dark, green and dramatic. Lights staying low, obviously. 🕯️",images:["stay-d1.jpg","stay-d2.jpg"]},
+  {id:"E",line:"A proper whirlpool tub. Jets, bubbles, the works — and it’s in the room with the bed. 🛁🍾",images:["stay-e1.jpg","stay-e2.jpg"]}
+];
+const fallback={departureDate:"24 September 2026",returnDate:"27 September 2026",duration:"3 Days",category:"romantic",subtopics:["Private Pool","Massage & Spa","Beachfront Romance"],matches:["Somewhere lovely","A little surprise"]};
+const journey=result||fallback;
+const summary=document.querySelector("#summary-card");
+const wishes=document.querySelector("#picked-wishes");
+const hotel=document.querySelector("#hotel");
+const showStays=document.querySelector("#show-stays");
+const grid=document.querySelector("#stay-grid");
+const note=document.querySelector("#hotel-note");
+const lock=document.querySelector("#lock-in");
+let picked="";
+summary.innerHTML=`<p class="summary-card__date">${journey.departureDate} → ${journey.returnDate} · ${journey.duration}</p><p class="summary-card__mood">${moodNames[journey.category]||"A lovely little escape"}</p><ul class="wish-list">${(journey.subtopics||[]).map(item=>`<li>${item}</li>`).join("")}</ul><p class="summary-card__where">The romance machine is narrowing things down… <strong>${(journey.matches||[]).join(" + ")}</strong></p>`;
+wishes.innerHTML=(journey.subtopics||[]).map(item=>`<span>${item}</span>`).join("");
+rooms.forEach(room=>{const card=document.createElement("article");card.className="stay-card";card.dataset.stay=room.id;card.innerHTML=`<span class="stay-card__letter">${room.id}</span><img class="stay-card__main" src="../stays/${room.images[0]}" alt="Hotel room option ${room.id}" decoding="async"><div class="stay-thumbs">${room.images.map((img,index)=>`<button class="stay-thumb ${index===0?"is-active":""}" type="button" data-src="../stays/${img}" aria-label="View photo ${index+1}"><img src="../stays/${img}" alt=""></button>`).join("")}</div><p class="stay-card__line">${room.line}</p><button class="stay-pick" type="button">Pick this one</button>`;grid.append(card);});
+showStays.addEventListener("click",()=>{hotel.hidden=false;hotel.scrollIntoView({behavior:"smooth",block:"start"});});
+grid.addEventListener("click",event=>{const thumb=event.target.closest(".stay-thumb");if(thumb){const card=thumb.closest(".stay-card");card.querySelector(".stay-card__main").src=thumb.dataset.src;card.querySelectorAll(".stay-thumb").forEach(item=>item.classList.toggle("is-active",item===thumb));return;}const choose=event.target.closest(".stay-pick");if(!choose)return;const card=choose.closest(".stay-card");grid.querySelectorAll(".stay-card").forEach(item=>item.classList.toggle("stay-card--selected",item===card));picked=card.dataset.stay;note.textContent={A:"A tub in the bedroom. Someone’s planning a long soak. 🛁😏",B:"Crisp and bright. You just want something to ruin. 😇",C:"Big and old-money. Room to misbehave, noted. 🥂",D:"Dark and dramatic. Lights low it is. 🕯️",E:"Whirlpool tub, petals, wine. You’ve thought about this. 🛁🍷🔥"}[picked];lock.disabled=false;});
+const form={action:"https://docs.google.com/forms/d/e/1FAIpQLScTqvZph6bo1KU10DsAG8EXNVf1uZt-DqjNLOjvRQGLRROxSw/formResponse",departure:"entry.710496997",return:"entry.24262052",duration:"entry.467304395",ready:"entry.669722799",category:"entry.376827372",prefs:{romantic:"entry.771596186",berserk:"entry.1555155891",culture:"entry.341290519"},all:"entry.517397756",best:"entry.1525153853",second:"entry.25358909",verdict:"entry.805218220"};
+function sendResponse(){if(!result)return;const p=new FormData();p.append(form.departure+"_year","2026");p.append(form.departure+"_month","09");p.append(form.departure+"_day","24");p.append(form.return,result.returnDate);p.append(form.duration,result.duration);p.append(form.ready,"Yes");p.append(form.category,moodNames[result.category]||result.category);(result.subtopics||[]).forEach(x=>p.append(form.prefs[result.category],x));p.append(form.all,(result.subtopics||[]).join("\n"));p.append(form.best,(result.matches||[])[0]||"");p.append(form.second,(result.matches||[])[1]||"");p.append(form.verdict,`${moodNames[result.category]} | ${(result.subtopics||[]).join(", ")} | Room ${picked}`);fetch(form.action,{method:"POST",mode:"no-cors",body:p});}
+const dialog=document.querySelector("#done-dialog"),fireworks=document.querySelector("#fireworks");
+function launch(){fireworks.replaceChildren();["#dabd88","#f9edda","#e7a1a0","#f2a85e"].forEach((color,shade)=>{for(let i=0;i<16;i++){const s=document.createElement("i");s.className="firework";s.style.setProperty("--angle",`${shade*24+i*22.5}deg`);s.style.setProperty("--distance",`${75+Math.random()*140}px`);s.style.setProperty("--delay",`${Math.random()*.35}s`);s.style.setProperty("--spark",color);fireworks.append(s);}});}
+const birthday=new Date("2026-09-25T00:00:00+08:00").getTime();function tick(){let s=Math.max(0,Math.floor((birthday-Date.now())/1000));document.querySelector("#days").textContent=String(Math.floor(s/86400)).padStart(2,"0");document.querySelector("#hours").textContent=String(Math.floor(s%86400/3600)).padStart(2,"0");document.querySelector("#minutes").textContent=String(Math.floor(s%3600/60)).padStart(2,"0");document.querySelector("#seconds").textContent=String(s%60).padStart(2,"0");}
+lock.addEventListener("click",()=>{journey.stay=picked;localStorage.setItem("poutyVerdict",JSON.stringify(journey));sendResponse();launch();tick();dialog.showModal();});
+document.querySelector("#done-close").addEventListener("click",()=>{dialog.close();location.href="../";});
