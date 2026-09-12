@@ -1,22 +1,15 @@
 (function(){
-  const canvas=document.querySelector("#scene"), chapters=[...document.querySelectorAll(".chapter")], dots=[...document.querySelectorAll(".tour-progress i")];
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
-  const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x170806,.046);const camera=new THREE.PerspectiveCamera(43,1,.1,100);const root=new THREE.Group();scene.add(root);
-  const gold=new THREE.MeshStandardMaterial({color:0xd8ae70,roughness:.28,metalness:.76}),leather=new THREE.MeshStandardMaterial({color:0x552619,roughness:.44,metalness:.15}),paper=new THREE.MeshStandardMaterial({color:0xefdbb8,roughness:.7});
-  scene.add(new THREE.HemisphereLight(0xffd4a7,0x110604,2.2));const light=new THREE.PointLight(0xffad5e,42,20);light.position.set(-3,4,5);scene.add(light);const rim=new THREE.PointLight(0xd99048,28,15);rim.position.set(4,1,-2);scene.add(rim);
-  const floor=new THREE.Mesh(new THREE.CircleGeometry(9,64),new THREE.MeshStandardMaterial({color:0x160806,roughness:.75}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.6;scene.add(floor);
-  const makeBox=(w,h,d,m,x,y,z,parent=root)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d,.1,.06,.1),m);o.position.set(x,y,z);parent.add(o);return o};
-  const suitcase=new THREE.Group();root.add(suitcase);makeBox(3,1.7,.72,leather,0,-.08,0,suitcase);const lid=makeBox(3,1.55,.19,leather,0,.03,.47,suitcase);makeBox(3.12,.12,.12,gold,0,-.78,.48,suitcase);makeBox(3.12,.1,.12,gold,0,.65,.48,suitcase);const tag=new THREE.Mesh(new THREE.BoxGeometry(.78,.48,.05),paper);tag.position.set(1.05,-.05,.58);tag.rotation.z=-.13;suitcase.add(tag);
-  const calendar=new THREE.Group();root.add(calendar);makeBox(2.5,2.05,.1,paper,-1.75,.1,-.35,calendar);makeBox(2.5,.36,.13,new THREE.MeshStandardMaterial({color:0xb94d40,roughness:.5}),-1.75,1.05,-.25,calendar);for(let y=0;y<3;y++)for(let x=0;x<4;x++){const dot=new THREE.Mesh(new THREE.CircleGeometry(.115,16),new THREE.MeshBasicMaterial({color:(y===1&&x===1)?0xd8ae70:0x351714}));dot.position.set(-2.42+x*.47,.54-y*.46,-.43);calendar.add(dot)}
-  const bags=new THREE.Group();root.add(bags);[[-1.6,-.78,.12,.75,.95,0xcb6b4b],[1.55,-.86,.2,.68,.78,0x7770a1],[1.12,-.35,-.55,.5,.62,0x89563a]].forEach(a=>{makeBox(a[3],a[4],.28,new THREE.MeshStandardMaterial({color:a[5],roughness:.55}),a[0],a[1],a[2],bags);const h=new THREE.Mesh(new THREE.TorusGeometry(a[3]*.22,.035,8,18),gold);h.position.set(a[0],a[1]+a[4]/2,a[2]);bags.add(h)});
-  const cards=new THREE.Group();root.add(cards);for(let i=0;i<4;i++){const t=makeBox(1.05,.62,.05,paper,-1.75+(i%2)*1.2,.85-Math.floor(i/2)*.85,-.2,cards);t.rotation.z=(i-1.5)*.08;const seal=new THREE.Mesh(new THREE.CircleGeometry(.1,16),new THREE.MeshBasicMaterial({color:i%2?0xc7655c:0xd8ae70}));seal.position.set(t.position.x+.32,t.position.y-.12,-.25);cards.add(seal)}
-  const key=new THREE.Group();root.add(key);const ring=new THREE.Mesh(new THREE.TorusGeometry(.32,.08,12,32),gold);ring.position.set(1.6,.45,.35);const shaft=new THREE.Mesh(new THREE.BoxGeometry(.16,1.25,.12),gold);shaft.position.set(1.6,-.3,.35);makeBox(.42,.18,.14,gold,1.76,-.72,.35,key);key.add(ring,shaft);
-  const city=new THREE.Group();root.add(city);for(let x=-3;x<=3;x+=.75)for(let z=-1.5;z<=1.5;z+=.75){const h=.3+Math.random()*1.65;makeBox(.46,h,.46,new THREE.MeshStandardMaterial({color:0x452019,roughness:.55,metalness:.14,emissive:0x190804,emissiveIntensity:.35}),x,-1.35+h/2,z,city);if(Math.random()>.53)makeBox(.05,.065,.48,new THREE.MeshStandardMaterial({color:0xf3ad56,emissive:0xf3a640,emissiveIntensity:1.3}),x,-1.35+h*.55,z+.24,city)}const moon=new THREE.Mesh(new THREE.SphereGeometry(.42,24,24),new THREE.MeshBasicMaterial({color:0xffd083}));moon.position.set(2.2,1.8,-1.8);city.add(moon);
-  const plane=new THREE.Group();scene.add(plane);const fuselage=new THREE.Mesh(new THREE.ConeGeometry(.11,.9,12),new THREE.MeshStandardMaterial({color:0xf9edda,roughness:.25,metalness:.4}));fuselage.rotation.x=Math.PI/2;plane.add(fuselage,new THREE.Mesh(new THREE.BoxGeometry(1.05,.035,.22),gold));plane.position.set(-4,-.7,2);plane.rotation.z=-.18;
-  const portal=new THREE.Mesh(new THREE.TorusGeometry(1.45,.045,12,64),new THREE.MeshBasicMaterial({color:0xd8ae70,transparent:true,opacity:.8}));portal.position.set(0,.15,-1.7);scene.add(portal);
-  let progress=0,target=0;function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}addEventListener("resize",resize);resize();
-  function updateStory(){const height=document.documentElement.scrollHeight-innerHeight;target=height?scrollY/height:0;const index=Math.min(6,Math.floor(target*7+.001));document.body.dataset.chapter=String(index);chapters.forEach((chapter,i)=>chapter.classList.toggle("chapter--active",i===index));dots.forEach((dot,i)=>dot.classList.toggle("is-active",i<=index))}addEventListener("scroll",updateStory,{passive:true});updateStory();
-  function smoothstep(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)}function animate(t){requestAnimationFrame(animate);progress+=(target-progress)*.055;const p=progress;const bagP=smoothstep(.15,.3,p)*(1-smoothstep(.47,.58,p)),cardP=smoothstep(.32,.47,p)*(1-smoothstep(.62,.72,p)),keyP=smoothstep(.52,.67,p)*(1-smoothstep(.77,.87,p)),cityP=smoothstep(.73,.98,p);
-    suitcase.visible=p<.75;calendar.visible=p<.26;bags.visible=bagP>.01;cards.visible=cardP>.01;key.visible=keyP>.01;city.visible=cityP>.01;calendar.position.x=-p*1.2;bags.position.x=(1-bagP)*2;cards.rotation.y=(1-cardP)*.85;key.rotation.y=t*.001;key.position.x=(1-keyP)*2.3;city.scale.setScalar(.5+cityP*.7);city.position.z=1-cityP*1.5;portal.scale.setScalar(.35+cityP*3.1);portal.rotation.z=t*.002;portal.material.opacity=cityP*.7;plane.position.set(-4+smoothstep(.68,.91,p)*7.4,-.7+Math.sin(smoothstep(.68,.91,p)*Math.PI)*.7,2-smoothstep(.68,.91,p)*5.5);
-    root.rotation.y=-.12+p*.42;root.rotation.x=Math.sin(t*.0005)*.035;root.position.y=Math.sin(t*.0008)*.055;lid.rotation.x=smoothstep(.23,.43,p)*-.56;camera.position.set(0,1.3-p*.55,8-p*5.4);camera.lookAt(0,-.15,-.55);light.color.set(p>.72?0xff8c3c:0xffb466);renderer.render(scene,camera)}animate(0);
+  const chapters=[...document.querySelectorAll(".chapter")];
+  const dots=[...document.querySelectorAll(".tour-progress i")];
+  function updateStory(){
+    const height=document.documentElement.scrollHeight-innerHeight;
+    const progress=height?scrollY/height:0;
+    const index=Math.min(chapters.length-1,Math.floor(progress*chapters.length+.001));
+    document.body.dataset.chapter=String(index);
+    chapters.forEach((chapter,i)=>chapter.classList.toggle("chapter--active",i===index));
+    dots.forEach((dot,i)=>dot.classList.toggle("is-active",i<=index));
+  }
+  addEventListener("scroll",updateStory,{passive:true});
+  addEventListener("resize",updateStory);
+  updateStory();
 })();
