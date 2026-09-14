@@ -6,6 +6,7 @@
   let current=0;
   function setChapter(index){
     if(index===current&&document.body.dataset.scene!==undefined)return;
+    document.body.dataset.direction=index>=current?"forward":"back";
     current=index;
     document.body.dataset.scene=String(index);
     chapters.forEach((chapter,i)=>chapter.classList.toggle("chapter--active",i===index));
