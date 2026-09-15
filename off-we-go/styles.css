@@ -92,3 +92,17 @@ html,body{overflow-x:clip}
 .final .lock-content{left:1.5rem;right:1.5rem;width:auto;margin:auto;max-width:42rem;max-height:calc(100svh - 7rem);overflow:visible}
 @media(max-width:720px){.chapter>div{top:auto;bottom:5.5rem;left:1.5rem;right:2rem;transform:none!important;max-height:calc(100svh - 9rem)}.chapter:nth-child(3)>div{left:1.5rem}.final .lock-content{top:50%;bottom:auto;transform:translateY(-50%)!important}.lock-stage{height:145px}.final p{margin-top:1rem;margin-bottom:.5rem}}
 @media(max-height:650px){.final .lock-content{max-height:calc(100svh - 6rem)}.lock-stage{height:105px;margin-bottom:.5rem}.padlock{scale:.65}.final h2{font-size:2.6rem}.final p{font-size:1rem;margin:.7rem auto}.final button{margin-top:.5rem}}
+
+/* Boarding reveal: complete artwork followed by two Singapore-time countdowns. */
+#boarding-dialog[open]{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1.5rem}
+#boarding-dialog img{flex:none;max-height:60dvh;max-width:min(100%,1100px)}
+.boarding-countdowns{width:min(100%,860px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding-bottom:env(safe-area-inset-bottom)}
+.countdown-card{text-align:center;border:1px solid #d8ae7066;border-radius:16px;padding:1.1rem;background:linear-gradient(135deg,#241910,#0d0b09)}
+.countdown-card h2{font:italic 400 clamp(1.3rem,2.3vw,1.8rem)/1.15 "Cormorant Garamond",serif;margin:0 0 .6rem;color:var(--cream)}
+.countdown-card time{font-size:.62rem;color:#d8ae70;line-height:1.6}
+.countdown-digits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem;margin-top:1rem}
+.countdown-digits span{display:grid;gap:.35rem}
+.countdown-digits b{font:400 clamp(1.45rem,3vw,2rem)/1.1 "DM Mono",monospace;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.countdown-digits small{font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:#cbbb9f}
+.countdown-finished{font:italic 1.25rem "Cormorant Garamond",serif;color:var(--gold);margin:.8rem 0 0}
+@media(max-width:720px){.boarding-countdowns{grid-template-columns:1fr;gap:.8rem}.countdown-card{padding:1rem}.countdown-card h2{font-size:1.55rem}#boarding-dialog img{max-height:65dvh}#boarding-dialog[open]{gap:1rem}}
