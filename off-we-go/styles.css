@@ -37,3 +37,49 @@ html{scroll-snap-type:none}
 .bag-object{display:none!important}
 .world .arrival{background-position:center top!important}
 .chapter:nth-child(4)>div{text-shadow:0 2px 18px #000}
+
+/* Five-scene journey: desk, takeoff, night walk, room, black lock screen. */
+.world{background:#000}
+.world .room{background:none!important}
+.room-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.world .room:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0006,transparent)}
+.world .lock{background:#000!important;filter:none}
+.chapter:nth-child(3)>div{margin-left:auto;text-align:right;text-shadow:0 2px 18px #000}
+.chapter:nth-child(3) p{margin-left:auto}
+.chapter:nth-child(4)>div{margin-left:0;text-align:left}
+.chapter:nth-child(4) p{margin-left:0}
+.final{align-items:center;text-align:center;overflow:hidden;min-height:100svh;padding:5rem 1.5rem}
+.final .lock-content{width:100%;max-width:42rem;margin:auto;text-align:center;perspective:900px}
+.final p{margin-left:auto;margin-right:auto}
+.final h2{font-size:clamp(2.8rem,5.5vw,5rem);line-height:.95}
+.lock-stage{height:190px;display:grid;place-items:center;margin:0 auto 1.5rem;perspective:900px}
+.padlock{position:relative;width:122px;height:152px;transform-style:preserve-3d;transform:rotateX(-9deg) rotateY(-18deg);filter:drop-shadow(0 12px 24px #d8ae7025)}
+.lock-body{position:absolute;bottom:0;left:0;width:122px;height:92px;transform-style:preserve-3d}
+.face{position:absolute;display:block;background:#ad7534;backface-visibility:hidden}
+.face.front,.face.back{width:122px;height:92px;border-radius:13px}
+.face.front{transform:translateZ(15px);background:linear-gradient(125deg,#f9e5b0,#c49045 48%,#f5d993 75%,#a16e30);box-shadow:inset 0 0 0 2px #f4d995,inset 0 6px 10px #fff5}
+.face.back{transform:rotateY(180deg) translateZ(15px)}
+.face.left,.face.right{width:30px;height:80px;top:6px;background:linear-gradient(#d4a75a,#855323)}
+.face.left{left:46px;transform:rotateY(-90deg) translateZ(61px)}
+.face.right{left:46px;transform:rotateY(90deg) translateZ(61px)}
+.face.top,.face.bottom{width:100px;height:30px;left:11px;top:31px;background:#d9b877}
+.face.top{transform:rotateX(90deg) translateZ(46px)}
+.face.bottom{transform:rotateX(-90deg) translateZ(46px);background:#70431e}
+.keyhole{position:absolute;top:30px;left:52px;width:18px;height:18px;border-radius:50%;background:#211407;box-shadow:0 1px 1px #ffefbc}
+.keyhole:after{content:"";position:absolute;top:12px;left:4px;width:10px;height:17px;background:#211407;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
+.shackle{position:absolute;top:2px;left:23px;width:76px;height:90px;border:13px solid #dfc89a;border-bottom:0;border-radius:42px 42px 0 0;transform:translateZ(0);box-shadow:inset 3px 0 3px #684929,3px -2px 1px #ffefd0;transform-origin:80% 100%;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.unlocking .shackle{transform:translateY(-28px) rotateY(-45deg) rotateZ(-12deg)}
+.unlocking .padlock{animation:enter-lock 1.45s cubic-bezier(.5,0,.2,1) forwards}
+.unlocking .lock-content>small,.unlocking .lock-content>h2,.unlocking .lock-content>p,.unlocking #unlock{opacity:0;transition:opacity .3s}
+@keyframes enter-lock{0%,38%{transform:rotateX(-9deg) rotateY(-18deg) scale(1);opacity:1}80%{opacity:1}100%{transform:rotateX(0) rotateY(0) scale(17);opacity:0}}
+body.revealing{overflow:hidden}
+body.revealing .travel-orbit,body.revealing header,body.revealing nav{visibility:hidden}
+#boarding-dialog{position:fixed;inset:0;margin:0;border:0;padding:4.5rem 1rem 1.5rem;width:100vw;max-width:none;height:100dvh;max-height:none;background:#000;color:var(--cream);overflow:auto}
+#boarding-dialog[open]{display:grid;place-items:center;animation:pass-enter .45s ease-out}
+#boarding-dialog::backdrop{background:#000}
+#boarding-dialog img{display:block;max-width:100%;max-height:calc(100dvh - 6rem);width:auto;height:auto;object-fit:contain}
+#close-pass{position:absolute;top:max(1rem,env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right));margin:0;min-height:44px;z-index:1;background:#17120e}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+@keyframes pass-enter{from{opacity:0}to{opacity:1}}
+@media(max-width:720px){.chapter:nth-child(3)>div{text-align:left;margin-left:0}.chapter:nth-child(3) p{margin-left:0}.lock-stage{height:165px;margin-bottom:1rem}.padlock{scale:.85}.final{padding-top:4.5rem;padding-bottom:4rem}.final p{font-size:1.15rem}}
+@media(prefers-reduced-motion:reduce){.shackle{transition:none}.unlocking .padlock,#boarding-dialog[open]{animation:none}}
