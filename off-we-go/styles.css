@@ -29,3 +29,11 @@ html{scroll-snap-type:none}
 .shade{background:linear-gradient(180deg,#09030322,transparent 45%,#09030344)}
 @media(max-width:720px){.flight-photo{object-position:74% 50%}.chapter{padding-bottom:5rem}.world .desk{background-position:center!important}}
 @media(prefers-reduced-motion:reduce){.chapter>div{transition:none}}
+
+/* Supplied night walk replaces the store scene; the sky is the shared transition point. */
+.world .bag{background-image:none!important;background-color:#111a2d}
+.night-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.world .bag:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#070c1815 30%,#09030388 100%)}
+.bag-object{display:none!important}
+.world .arrival{background-position:center top!important}
+.chapter:nth-child(4)>div{text-shadow:0 2px 18px #000}
