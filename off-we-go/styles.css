@@ -83,3 +83,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
 @keyframes pass-enter{from{opacity:0}to{opacity:1}}
 @media(max-width:720px){.chapter:nth-child(3)>div{text-align:left;margin-left:0}.chapter:nth-child(3) p{margin-left:0}.lock-stage{height:165px;margin-bottom:1rem}.padlock{scale:.85}.final{padding-top:4.5rem;padding-bottom:4rem}.final p{font-size:1.15rem}}
 @media(prefers-reduced-motion:reduce){.shackle{transition:none}.unlocking .padlock,#boarding-dialog[open]{animation:none}}
+
+/* Keep camera transforms inside the stage and chapter text stable in both directions. */
+html,body{overflow-x:clip}
+.chapter>div{transform:none!important}
