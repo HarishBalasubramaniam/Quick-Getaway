@@ -89,3 +89,29 @@
  dialog.addEventListener('close',reset);
  measure();
 })();
+/* Absolute UTC+08 targets remain correct regardless of the visitor's timezone. */
+(()=>{
+ const dialog=document.querySelector('#boarding-dialog');
+ const cards=[...document.querySelectorAll('.countdown-card')];
+ if(!dialog||!cards.length)return;
+ function countdownParts(target,now){const total=Math.max(0,Math.ceil((target-now)/1000));return {days:Math.floor(total/86400),hours:Math.floor(total/3600)%24,minutes:Math.floor(total/60)%60,seconds:total%60};}
+ let interval;
+ function tick(){
+  const now=Date.now();
+  cards.forEach(card=>{
+   const target=Date.parse(card.dataset.target),parts=countdownParts(target,now);
+   Object.entries(parts).forEach(([unit,value])=>{card.querySelector('[data-unit="'+unit+'"]').textContent=String(value).padStart(2,'0')});
+   const finished=card.querySelector('.countdown-finished');
+   finished.hidden=now<target;
+   finished.textContent=now>=target?card.dataset.finished:'';
+  });
+ }
+ function sync(){
+  clearInterval(interval);
+  tick();
+  if(dialog.open&&!document.hidden)interval=setInterval(tick,1000);
+ }
+ new MutationObserver(sync).observe(dialog,{attributes:true,attributeFilter:['open']});
+ document.addEventListener('visibilitychange',sync);
+ tick();
+})();
