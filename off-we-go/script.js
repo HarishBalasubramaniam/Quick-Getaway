@@ -26,6 +26,16 @@
     draw(i+1,fade,reduced.matches?1:1+.18*(1-t),origins[i+1]);
     layers[i].style.opacity=1-fade;
   }
+  // Arrival rises into the sky, dissolves to night, then reveals the street.
+  if(i===2&&!reduced.matches){
+    const rise=ease(clamp(t/.48));
+    const dissolve=ease(clamp((t-.38)/.22));
+    const reveal=ease(clamp((t-.58)/.42));
+    draw(2,1,1+5*rise,'58% 2%');
+    draw(3,dissolve,6-5*reveal,'62% 2%');
+    // Keep the outgoing image opaque under the incoming sky to avoid a black dip.
+    if(dissolve===1)layers[2].style.visibility='hidden';
+  }
   chapters.forEach((c,n)=>{
     c.classList.toggle('active',n===active);
     const rect=c.getBoundingClientRect();
