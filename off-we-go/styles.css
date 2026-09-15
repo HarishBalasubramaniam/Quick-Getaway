@@ -84,6 +84,11 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
 @media(max-width:720px){.chapter:nth-child(3)>div{text-align:left;margin-left:0}.chapter:nth-child(3) p{margin-left:0}.lock-stage{height:165px;margin-bottom:1rem}.padlock{scale:.85}.final{padding-top:4.5rem;padding-bottom:4rem}.final p{font-size:1.15rem}}
 @media(prefers-reduced-motion:reduce){.shackle{transition:none}.unlocking .padlock,#boarding-dialog[open]{animation:none}}
 
-/* Keep camera transforms inside the stage and chapter text stable in both directions. */
+/* One viewport-aligned caption layer, synchronized with the camera instead of drifting past it. */
 html,body{overflow-x:clip}
-.chapter>div{transform:none!important}
+.chapter{perspective:none}
+.chapter>div{position:fixed;top:50%;left:9vw;right:9vw;width:auto;max-width:41rem;max-height:calc(100svh - 9rem);transform:translateY(-50%)!important;transition:none!important}
+.chapter:nth-child(3)>div{left:auto;max-width:41rem}
+.final .lock-content{left:1.5rem;right:1.5rem;width:auto;margin:auto;max-width:42rem;max-height:calc(100svh - 7rem);overflow:visible}
+@media(max-width:720px){.chapter>div{top:auto;bottom:5.5rem;left:1.5rem;right:2rem;transform:none!important;max-height:calc(100svh - 9rem)}.chapter:nth-child(3)>div{left:1.5rem}.final .lock-content{top:50%;bottom:auto;transform:translateY(-50%)!important}.lock-stage{height:145px}.final p{margin-top:1rem;margin-bottom:.5rem}}
+@media(max-height:650px){.final .lock-content{max-height:calc(100svh - 6rem)}.lock-stage{height:105px;margin-bottom:.5rem}.padlock{scale:.65}.final h2{font-size:2.6rem}.final p{font-size:1rem;margin:.7rem auto}.final button{margin-top:.5rem}}
