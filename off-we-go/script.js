@@ -1,56 +1,82 @@
 (()=>{
- const chapters=[...document.querySelectorAll('.chapter')], dots=[...document.querySelectorAll('nav i')];
- const layers=['desk','flight','arrival','bag','room','lock'].map(s=>document.querySelector('.'+s));
+ const chapters=[...document.querySelectorAll('.chapter')],dots=[...document.querySelectorAll('nav i')];
+ const layers=['desk','flight','bag','room','lock'].map(s=>document.querySelector('.'+s));
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const clamp=n=>Math.max(0,Math.min(1,n)),ease=n=>n*n*(3-2*n);
  let offsets=[],queued=false;
- const clamp=n=>Math.max(0,Math.min(1,n)), ease=n=>n*n*(3-2*n);
  function measure(){offsets=chapters.map(c=>c.getBoundingClientRect().top+scrollY);schedule()}
+ // Map an image-space feature to the viewport after object-fit: cover.
+ function focal(selector,x,y,px=.5,py=.5){
+  const img=document.querySelector(selector),w=innerWidth,h=innerHeight;
+  if(!img.naturalWidth)return (x*100)+'% '+(y*100)+'%';
+  const scale=Math.max(w/img.naturalWidth,h/img.naturalHeight);
+  const iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
+  return (clamp((x*iw-(iw-w)*px)/w)*100)+'% '+(clamp((y*ih-(ih-h)*py)/h)*100)+'%';
+ }
  function render(){
-  queued=false;let i=0;while(i<offsets.length-1&&scrollY>=offsets[i+1])i++;
-  const raw=i<5?clamp((scrollY-offsets[i])/(offsets[i+1]-offsets[i])):0;
-  const t=reduced.matches?(raw>.5?1:0):ease(clamp((raw-.22)/.66));
-  const active=Math.min(5,i+(t>.5?1:0));
+  queued=false;let i=0;const last=chapters.length-1;
+  while(i<last&&scrollY>=offsets[i+1])i++;
+  const raw=i<last?clamp((scrollY-offsets[i])/(offsets[i+1]-offsets[i])):0;
+  const t=reduced.matches?(raw>.5?1:0):ease(clamp((raw-.20)/.70));
+  const active=Math.min(last,i+(t>.5?1:0));
   document.body.dataset.scene=active;
-  document.body.style.setProperty('--orbit',((i+t)*60)+'deg');
-  layers.forEach(l=>{l.style.opacity='0';l.style.transform='none';l.style.visibility='hidden'});
-  const mobile=innerWidth<=720;
+  document.body.style.setProperty('--orbit',((i+t)*75)+'deg');
+  layers.forEach(l=>{l.style.opacity='0';l.style.visibility='hidden';l.style.transform='none'});
   const draw=(n,opacity,scale,origin)=>{
-    const l=layers[n];l.style.visibility='visible';l.style.opacity=opacity;
-    l.style.transformOrigin=origin;l.style.transform='scale('+scale+')';
+   const l=layers[n];l.style.visibility='visible';l.style.opacity=opacity;
+   l.style.transformOrigin=origin;l.style.transform='scale('+scale+')';
   };
-  const origins=[mobile?'76% 55%':'72% 49%','78% 54%','72% 42%','65% 50%','60% 50%','50% 50%'];
-  const zooms=[2.65,1.18,1.9,1.12,1.12,1];
-  draw(i,1,reduced.matches?1:1+(zooms[i]-1)*t,origins[i]);
-  if(i<5){
-    const fade=ease(clamp((t-.28)/.72));
-    draw(i+1,fade,reduced.matches?1:1+.18*(1-t),origins[i+1]);
-    layers[i].style.opacity=1-fade;
-  }
-  // Arrival rises into the sky, dissolves to night, then reveals the street.
-  if(i===2&&!reduced.matches){
-    const rise=ease(clamp(t/.48));
-    const dissolve=ease(clamp((t-.38)/.22));
-    const reveal=ease(clamp((t-.58)/.42));
-    draw(2,1,1+5*rise,'58% 2%');
-    draw(3,dissolve,6-5*reveal,'62% 2%');
-    // Keep the outgoing image opaque under the incoming sky to avoid a black dip.
-    if(dissolve===1)layers[2].style.visibility='hidden';
+  const mobile=innerWidth<=720;
+  const origins=[mobile?'76% 55%':'72% 49%',focal('.flight-photo',.78,.35,mobile?.74:.72),focal('.night-photo',.91,.32,.5,0),focal('.room-photo',.48,.24),'50% 50%'];
+  draw(i,1,1,origins[i]);
+  if(i<last){
+   if(reduced.matches){draw(i+1,t,1,origins[i+1])}
+   else {
+    const push=ease(clamp(t/.58));
+    const fade=ease(clamp((t-.42)/.34));
+    const pull=ease(clamp((t-.60)/.40));
+    const zoom=[2.65,5.5,4.2,5][i];
+    draw(i,1,1+(zoom-1)*push,origins[i]);
+    // Sun fills the view, then the dark sky recedes into the night walk.
+    const incomingOrigin=i===1?focal('.night-photo',.62,.035,.5,0):origins[i+1];
+    const incomingZoom=i===1?5:i===2?1.6:1.18;
+    draw(i+1,fade,i===3?1:1+(incomingZoom-1)*(1-pull),incomingOrigin);
+    if(fade===1)layers[i].style.visibility='hidden';
+   }
   }
   chapters.forEach((c,n)=>{
-    c.classList.toggle('active',n===active);
-    const rect=c.getBoundingClientRect();
-    const visible=rect.bottom>0&&rect.top<innerHeight;
-    c.firstElementChild.style.opacity=visible?'1':'0';
-    c.firstElementChild.style.transform='none';
+   c.classList.toggle('active',n===active);
+   const rect=c.getBoundingClientRect();
+   c.firstElementChild.style.opacity=rect.bottom>0&&rect.top<innerHeight?'1':'0';
   });
   dots.forEach((d,n)=>d.classList.toggle('on',n<=active));
  }
  function schedule(){if(!queued){queued=true;requestAnimationFrame(render)}}
  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure);
  reduced.addEventListener('change',measure);document.fonts.ready.then(measure);
- const img=document.querySelector('.flight-photo');
- img.addEventListener('error',()=>{if(!img.dataset.retry){img.dataset.retry='1';img.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=85'}});
- const b=document.querySelector('#unlock'),p=document.querySelector('.pass');
- b.addEventListener('click',()=>{if(!p.hidden)return;p.hidden=false;b.disabled=true;b.textContent='LOCKED IN ✓';measure();p.scrollIntoView({behavior:reduced.matches?'auto':'smooth',block:'center'})});
+ document.querySelectorAll('.world img').forEach(img=>img.addEventListener('load',schedule));
+ const flight=document.querySelector('.flight-photo');
+ flight.addEventListener('error',()=>{if(!flight.dataset.retry){flight.dataset.retry='1';flight.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=85'}});
+ const button=document.querySelector('#unlock'),dialog=document.querySelector('#boarding-dialog'),close=document.querySelector('#close-pass');
+ const final=document.querySelector('.final'),padlock=document.querySelector('.padlock'),main=document.querySelector('main');
+ let opening=false,timer;
+ button.addEventListener('click',()=>{
+  if(opening||dialog.open)return;
+  opening=true;button.disabled=true;
+  document.body.classList.add('revealing');
+  final.classList.add('unlocking');padlock.setAttribute('aria-label','Unlocking golden padlock');
+  main.inert=true;
+  timer=setTimeout(()=>{
+   dialog.showModal();close.focus();opening=false;
+  },reduced.matches?0:1450);
+ });
+ function reset(){
+  clearTimeout(timer);opening=false;main.inert=false;
+  document.body.classList.remove('revealing');final.classList.remove('unlocking');
+  padlock.setAttribute('aria-label','Locked golden padlock');button.disabled=false;
+  button.focus({preventScroll:true});schedule();
+ }
+ close.addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('close',reset);
  measure();
 })();
