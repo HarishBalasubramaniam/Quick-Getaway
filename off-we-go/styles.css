@@ -14,3 +14,18 @@ body[data-scene="3"] .bag-object{opacity:1;transform:translateZ(190px) scale(1.1
 
 /* A shared orbit replaces the moving airplane mark: it advances chapter by chapter. */
 .plane{display:none!important}.travel-orbit{position:fixed;z-index:5;right:clamp(1.2rem,4vw,4rem);bottom:clamp(1.2rem,4vw,3rem);width:4.5rem;height:4.5rem;pointer-events:none;transform:perspective(700px) rotateX(58deg) rotateZ(var(--orbit,0deg));transition:transform 1.05s cubic-bezier(.2,.8,.2,1)}.travel-orbit i{position:absolute;inset:0;border:1px solid rgba(248,237,219,.38);border-radius:50%;box-shadow:0 .4rem 1.2rem rgba(0,0,0,.28)}.travel-orbit i:nth-child(2){inset:.62rem;border-color:rgba(216,174,112,.66);transform:rotate(57deg)}.travel-orbit i:nth-child(3){inset:1.25rem;border-color:rgba(248,237,219,.22);transform:rotate(-32deg)}.travel-orbit b{position:absolute;top:-.17rem;left:50%;width:.48rem;height:.48rem;border-radius:50%;background:var(--gold);box-shadow:0 0 .8rem rgba(216,174,112,.9);transform:translateX(-50%)}body[data-scene="0"]{--orbit:0deg}body[data-scene="1"]{--orbit:60deg}body[data-scene="2"]{--orbit:120deg}body[data-scene="3"]{--orbit:180deg}body[data-scene="4"]{--orbit:240deg}body[data-scene="5"]{--orbit:300deg}@media(max-width:720px){.travel-orbit{right:.9rem;bottom:1.05rem;width:3.5rem;height:3.5rem}.travel-orbit i:nth-child(2){inset:.48rem}.travel-orbit i:nth-child(3){inset:.98rem}}@media(prefers-reduced-motion:reduce){.travel-orbit{transition:none}}
+
+/* A single scroll clock controls the opening wing match and all scene fades. */
+html{scroll-snap-type:none}
+.world .scene{inset:0;transition:none!important;background-position:center!important;will-change:transform,opacity}
+.world .flight{background-image:none!important;background-color:#93afc4}
+.flight-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:72% 50%}
+.world .flight:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,21,30,.32),transparent 65%)}
+.world .store,.world .street{display:none}
+.chapter>div{transition:opacity .15s linear;backface-visibility:visible}
+.chapter:nth-child(2)>div{margin-left:0;text-align:left}
+.chapter:nth-child(2) p{margin-left:0}
+.travel-orbit{transition:none}
+.shade{background:linear-gradient(180deg,#09030322,transparent 45%,#09030344)}
+@media(max-width:720px){.flight-photo{object-position:74% 50%}.chapter{padding-bottom:5rem}.world .desk{background-position:center!important}}
+@media(prefers-reduced-motion:reduce){.chapter>div{transition:none}}
